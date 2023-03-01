@@ -1,0 +1,16 @@
+.star{
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+.full{
+    background-image: url("full-star.png");
+}
+.half{
+    background-image: url("half-star.png");
+
+}
+.empty{
+    background-image: url("empty-star.png");
+
+}
