@@ -1,0 +1,20 @@
+.wrapper {
+    width: fit-content;
+}
+
+.oldPrice {
+    font-size: 12px;
+    font-weight: 500;
+    padding-left: 3px;
+    color: gray;
+    display: block;
+    margin: -3px;
+}
+
+.price {
+    width: fit-content;
+    display: block;
+    font-size: 20px;
+    font-weight: 500;
+}
+
