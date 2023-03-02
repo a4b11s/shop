@@ -1,11 +1,12 @@
 import React from "react";
 import classes from "./Price.module.css";
 
-const Price = (props: {
+interface IProps {
   price: number;
   discountPercentage: number;
   currency: string;
-}) => {
+}
+const Price = (props: IProps) => {
   const { price, discountPercentage, currency } = props;
 
   const isDiscount = discountPercentage > 0;
