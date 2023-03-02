@@ -5,6 +5,7 @@ import classes from "./ProductCard.module.css";
 
 import StarRating from "../StarRating/StarRating";
 import Price from "../Price/Price";
+import Button from "../Button/Button";
 
 interface IProps {
   product: IProducts;
@@ -45,24 +46,22 @@ const ProductCard = (props: IProps) => {
         <StarRating rating={rating} />
       </div>
       <div className={classes.cardFooter}>
-        <button
-          className={classes.brand}
-          onClick={(e) => {
+        <Button
+          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             e.stopPropagation();
             props.handleClickOnBrand(brand);
           }}
         >
           {brand}
-        </button>
-        <button
-          className={classes.category}
-          onClick={(e) => {
+        </Button>
+        <Button
+          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             e.stopPropagation();
             props.handleClickOnCategory(category);
           }}
         >
           {category}
-        </button>
+        </Button>
       </div>
     </div>
   );
