@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./StarRating.module.css";
+import classes from "./StarRating.module.css";
 
 const StarRating = (props: { rating: number }) => {
   const { rating } = props;
@@ -8,11 +8,11 @@ const StarRating = (props: { rating: number }) => {
     <div>
       {[...Array(5)].map((item, index) => {
         if (Math.floor(rating) > index) {
-          return <span className={style.star + " " + style.full}></span>;
+          return <span className={classes.star + " " + classes.full}></span>;
         } else if (rating > index && rating < index + 1) {
-          return <span className={style.star + " " + style.half}></span>;
+          return <span className={classes.star + " " + classes.half}></span>;
         } else {
-          return <span className={style.star + " " + style.empty}></span>;
+          return <span className={classes.star + " " + classes.empty}></span>;
         }
       })}
     </div>
