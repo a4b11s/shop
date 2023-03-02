@@ -3,6 +3,7 @@ import style from "./StarRating.module.css";
 
 const StarRating = (props: { rating: number }) => {
   const { rating } = props;
+
   return (
     <div>
       {[...Array(5)].map((item, index) => {
