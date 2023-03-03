@@ -1,0 +1,11 @@
+*{
+    font-family: montserrat, serif;
+}
+:root {
+    --primary-color: #0072e5;
+    --secondary-color: #e56b00;
+}
+.container{
+    max-width: 1200px;
+    margin: 20px auto 0;
+}
