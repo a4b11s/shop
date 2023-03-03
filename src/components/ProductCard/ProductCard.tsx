@@ -1,5 +1,5 @@
 import React from "react";
-import { IProducts } from "../../models";
+import { IProduct } from "../../models";
 
 import classes from "./ProductCard.module.css";
 
@@ -8,7 +8,7 @@ import Price from "../Price/Price";
 import Button from "../Button/Button";
 
 interface IProps {
-  product: IProducts;
+  product: IProduct;
   handleClickOnCard: Function;
   handleClickOnBrand: Function;
   handleClickOnCategory: Function;
