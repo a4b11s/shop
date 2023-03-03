@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IProducts } from "../models";
+import { IProduct } from "../models";
 
 interface IState {
-  data: Array<IProducts>;
+  data: Array<IProduct>;
   total: number | null;
   status: "pending" | "fulfilled" | "rejected" | null;
   error: string | null;
@@ -11,11 +11,11 @@ interface IState {
 const apiUrl = process.env.REACT_APP_API_HOST;
 
 export const fetchProducts = createAsyncThunk<
-  Array<IProducts>,
+  Array<IProduct>,
   undefined,
   { rejectValue: string }
 >("products/fetchPosts", async function (_, { rejectWithValue }) {
-  const response = await fetch((apiUrl as string) + "products?limit=0");
+  const response = await fetch((apiUrl as string) + "products?limit=10");
 
   if (response.ok) {
     const data = await response.json();
@@ -45,9 +45,9 @@ export const productsSlice = createSlice({
       state.status = "fulfilled";
       state.error = null;
     });
-    // builder.addCase(fetchPosts.rejected, (state, action) => {
-    //   state.status = "rejected";
-    //   state.error = action.payload as string;
-    // });
+    builder.addCase(fetchProducts.rejected, (state, action) => {
+      state.status = "rejected";
+      state.error = action.payload as string;
+    });
   },
 });
