@@ -5,14 +5,29 @@ const StarRating = (props: { rating: number }) => {
   const { rating } = props;
 
   return (
-    <div>
+    <div className={classes.wrapper}>
       {[...Array(5)].map((item, index) => {
         if (Math.floor(rating) > index) {
-          return <span className={classes.star + " " + classes.full}></span>;
+          return (
+            <span
+              key={index}
+              className={classes.star + " " + classes.full}
+            ></span>
+          );
         } else if (rating > index && rating < index + 1) {
-          return <span className={classes.star + " " + classes.half}></span>;
+          return (
+            <span
+              key={index}
+              className={classes.star + " " + classes.half}
+            ></span>
+          );
         } else {
-          return <span className={classes.star + " " + classes.empty}></span>;
+          return (
+            <span
+              key={index}
+              className={classes.star + " " + classes.empty}
+            ></span>
+          );
         }
       })}
     </div>
