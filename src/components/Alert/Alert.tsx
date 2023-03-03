@@ -1,4 +1,5 @@
 import React from "react";
+
 import classes from "./Alert.module.css";
 import alertIcon from "./alert.svg";
 
@@ -13,7 +14,7 @@ const Alert = (props: IProps) => {
     return (
       <div className={classes.wrapper}>
         <img className={classes.icon} src={alertIcon} alt="alert" />
-        <span>{message}</span>
+        <span>{message ? message : "Error"}!</span>
       </div>
     );
   } else {
