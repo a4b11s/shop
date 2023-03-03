@@ -6,7 +6,7 @@ export interface IRoutes {
   readonly component: Function;
 }
 
-export interface IProducts {
+export interface IProduct {
   id: number;
   title: string;
   description: string;
