@@ -19,3 +19,12 @@ export interface IProduct {
   thumbnail: string;
   images: Array<string>;
 }
+export interface IComment {
+  id: number;
+  body: string;
+  postId: number;
+  user: {
+    id: number;
+    username: string;
+  };
+}
