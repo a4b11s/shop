@@ -24,7 +24,7 @@ const Products = () => {
 
   if (status === "fulfilled" && data.length) {
     return (
-      <div style={{}} className={classes.wrapper}>
+      <div className={classes.wrapper}>
         {data.map((item) => {
           return (
             <ProductCard
