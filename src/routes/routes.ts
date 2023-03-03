@@ -1,5 +1,6 @@
 import { IRoutes } from "../models";
-import Products from "../views/Products";
+import Products from "../views/Products/Products";
+import SingleProduct from "../views/SingleProduct/SingleProduct";
 
 export const routes: Array<IRoutes> = [
   {
@@ -8,5 +9,12 @@ export const routes: Array<IRoutes> = [
     path: "/",
     name: "Products",
     component: Products,
+  },
+  {
+    isShow: false,
+    isIndex: false,
+    path: "/product/:id",
+    name: "SingleProduct",
+    component: SingleProduct,
   },
 ];
