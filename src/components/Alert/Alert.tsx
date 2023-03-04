@@ -1,7 +1,17 @@
 import React from "react";
 
 import classes from "./Alert.module.css";
-import alertIcon from "./alert.svg";
+import errorIcon from "./error.svg";
+import warningIcon from "./warning.svg";
+import infoIcon from "./info.svg";
+import successIcon from "./success.svg";
+
+const icons = {
+  error: errorIcon,
+  warning: warningIcon,
+  info: infoIcon,
+  success: successIcon,
+};
 
 interface IProps {
   isOpen: boolean;
@@ -14,7 +24,7 @@ const Alert = (props: IProps) => {
   if (isOpen) {
     return (
       <div className={classes.wrapper + " " + classes[type]}>
-        <img className={classes.icon} src={alertIcon} alt="alert" />
+        <img className={classes.icon} src={icons[type]} alt="alert" />
         <span>{message ? message : "Error"}!</span>
       </div>
     );
