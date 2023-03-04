@@ -118,7 +118,7 @@ const SingleProduct = () => {
   } else if (productsStatus === "pending") {
     return <Spinner />;
   } else {
-    return <Alert isOpen={true} message={productsError} />;
+    return <Alert type="error" isOpen={true} message={productsError} />;
   }
 };
 

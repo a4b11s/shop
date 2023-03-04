@@ -6,13 +6,14 @@ import alertIcon from "./alert.svg";
 interface IProps {
   isOpen: boolean;
   message: string | null;
+  type: "error" | "warning" | "info" | "success";
 }
 
 const Alert = (props: IProps) => {
-  const { isOpen, message } = props;
+  const { type, isOpen, message } = props;
   if (isOpen) {
     return (
-      <div className={classes.wrapper}>
+      <div className={classes.wrapper + " " + classes[type]}>
         <img className={classes.icon} src={alertIcon} alt="alert" />
         <span>{message ? message : "Error"}!</span>
       </div>
