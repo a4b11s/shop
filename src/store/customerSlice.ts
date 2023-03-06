@@ -5,15 +5,15 @@ interface ICart {
   product: IProduct;
   count: number;
 }
+
 interface IState {
   cart: Array<ICart>;
-  favorite: Array<IProduct>;
 }
 
 const initialState: IState = {
   cart: [],
-  favorite: [],
 };
+
 export const customerSlice = createSlice({
   name: "customer",
   initialState,
@@ -34,22 +34,22 @@ export const customerSlice = createSlice({
         (products) => products.product.id !== action.payload
       );
     },
-    addToFavorite: (state, action: PayloadAction<IProduct>) => {
-      const newProduct = action.payload;
-      const newProductInFavoriteIndex = state.favorite.findIndex(
-        (product) => product.id === newProduct.id
-      );
-      if (newProductInFavoriteIndex !== -1) {
-        state.favorite.push(newProduct);
+    changeCountInCart: (
+      state,
+      action: PayloadAction<{ productId: number; newCount: number }>
+    ) => {
+      const { productId, newCount } = action.payload;
+      if (newCount > 0) {
+        const productIndex = state.cart.findIndex(
+          (products) => products.product.id === productId
+        );
+        if (newCount <= state.cart[productIndex].product.stock) {
+          state.cart[productIndex].count = newCount;
+        }
       }
-    },
-    delFromFavorite: (state, action: PayloadAction<number>) => {
-      state.favorite = state.favorite.filter(
-        (product) => product.id !== action.payload
-      );
     },
   },
 });
 
-export const { addToCart, addToFavorite, delFromFavorite, delFromCart } =
+export const { addToCart, delFromCart, changeCountInCart } =
   customerSlice.actions;

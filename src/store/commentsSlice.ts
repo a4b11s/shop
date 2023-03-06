@@ -8,10 +8,17 @@ interface IState {
   error: string | null;
 }
 
+interface IFetchResponse {
+  comments: Array<IComment>;
+  total: number;
+  limit: number;
+  skip: number;
+}
+
 const apiUrl = process.env.REACT_APP_API_HOST;
 
 export const fetchComments = createAsyncThunk<
-  Array<IComment>,
+  IFetchResponse,
   number,
   { rejectValue: string }
 >("comments/fetchComments", async function (productId, { rejectWithValue }) {
@@ -20,8 +27,7 @@ export const fetchComments = createAsyncThunk<
   );
 
   if (response.ok) {
-    const data = await response.json();
-    return data.comments;
+    return await response.json();
   } else {
     return rejectWithValue("Server error");
   }
@@ -33,6 +39,7 @@ const initialState: IState = {
   status: null,
   error: null,
 };
+
 export const commentsSlice = createSlice({
   name: "comments",
   initialState,
@@ -43,7 +50,9 @@ export const commentsSlice = createSlice({
       state.error = null;
     });
     builder.addCase(fetchComments.fulfilled, (state, action) => {
-      state.data = action.payload;
+      const { comments, total } = action.payload;
+      state.data = comments;
+      state.total = total;
       state.status = "fulfilled";
       state.error = null;
     });

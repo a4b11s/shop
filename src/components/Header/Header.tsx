@@ -1,7 +1,10 @@
 import React from "react";
-import { routes } from "../../routes/routes";
 import { NavLink } from "react-router-dom";
+
+import { routes } from "../../routes/routes";
+
 import styles from "./Header.module.css";
+
 const Header = () => {
   return (
     <header className={styles.wrapper}>

@@ -1,6 +1,8 @@
 import React from "react";
-import classes from "./Comment.module.css";
+
 import { IComment } from "../../models";
+
+import classes from "./Comment.module.css";
 
 const Comment = (props: { comment: IComment }) => {
   const { user, body } = props.comment;

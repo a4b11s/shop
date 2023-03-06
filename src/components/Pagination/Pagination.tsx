@@ -1,5 +1,6 @@
 import React from "react";
 import cnBind from "classnames/bind";
+
 import classes from "./Pagination.module.css";
 
 const cx = cnBind.bind(classes);
@@ -15,8 +16,11 @@ const Pagination = (props: IProps) => {
     onChange && onChange(newPage);
   };
   const handleClickOnPageBtn = (value: number) => changePage(value);
+
   const handleClickOnPrevBtn = () => changePage(current - 1);
+
   const handleClickOnNextBtn = () => changePage(current + 1);
+
   return (
     <div className={classes.wrapper}>
       <button

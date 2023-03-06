@@ -1,11 +1,12 @@
 import React from "react";
-import { IProduct } from "../../models";
 
-import classes from "./ProductCard.module.css";
+import { IProduct } from "../../models";
 
 import StarRating from "../StarRating/StarRating";
 import Price from "../Price/Price";
 import Button from "../Button/Button";
+
+import classes from "./ProductCard.module.css";
 
 interface IProps {
   product: IProduct;

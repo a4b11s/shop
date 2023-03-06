@@ -1,0 +1,9 @@
+.totalPrice {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+}
+
+.totalPrice span {
+    margin-left: 10px;
+}

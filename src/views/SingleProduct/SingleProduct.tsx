@@ -1,65 +1,83 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../store/store";
 import { useParams } from "react-router-dom";
+
+import { fetchComments } from "../../store/commentsSlice";
+import { addToCart } from "../../store/customerSlice";
 
 import Price from "../../components/Price/Price";
 import StarRating from "../../components/StarRating/StarRating";
 import Slider from "../../components/Slider/Slider";
 import Button from "../../components/Button/Button";
-
-import classes from "./SingleProduct.module.css";
-import heartIcon from "./heart.svg";
-import basketIcon from "./basket.svg";
-import stockIcon from "./stock.svg";
-import truckIcon from "./truck.svg";
-import warrantyIcon from "./warranty.svg";
-import categoryIcon from "./category.svg";
-import { fetchComments } from "../../store/commentsSlice";
 import Comment from "../../components/Comment/Comment";
 import Spinner from "../../components/Spinner/Spinner";
 import Alert from "../../components/Alert/Alert";
 
+import basketIcon from "./icons/basket.svg";
+import stockIcon from "./icons/stock.svg";
+import truckIcon from "./icons/truck.svg";
+import warrantyIcon from "./icons/warranty.svg";
+import categoryIcon from "./icons/category.svg";
+
+import classes from "./SingleProduct.module.css";
+import { fetchSingleProducts } from "../../store/productsSlice";
+
 const SingleProduct = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-
+  const [isShowAddToCartAlert, setIsShowAddToCartAlert] = useState(false);
   const {
     data: productsData,
     status: productsStatus,
     error: productsError,
   } = useSelector((state: IRootState) => state.products);
+
   const { data: commentsData, status: commentsStatus } = useSelector(
     (state: IRootState) => state.comments
   );
-  const product = productsData.filter(
+
+  const [product] = productsData.filter(
     (product) => product.id === parseInt(id as string)
   );
-  const filteredCommentsData = commentsData.filter((comment) => {
-    return comment.postId === (id ? parseInt(id) : 0);
-  });
+
   useEffect(() => {
     if (id) {
+      if (!product) {
+        dispatch(fetchSingleProducts(parseInt(id)));
+      }
       dispatch(fetchComments(parseInt(id)));
     }
   }, [dispatch, id]);
-  if (productsStatus === "fulfilled" && id && product.length) {
-    const [
-      {
-        stock,
-        description,
-        images,
-        title,
-        category,
-        brand,
-        discountPercentage,
-        price,
-        rating,
-      },
-    ] = product;
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    setIsShowAddToCartAlert(true);
+    setTimeout(() => {
+      setIsShowAddToCartAlert(false);
+    }, 1500);
+  };
+
+  if (productsStatus === "fulfilled" && id && product) {
+    const {
+      stock,
+      description,
+      images,
+      title,
+      category,
+      brand,
+      discountPercentage,
+      price,
+      rating,
+    } = product;
 
     return (
       <>
+        <Alert
+          isOpen={isShowAddToCartAlert}
+          message="Added to cart!"
+          type="success"
+        />
         <section className={classes.header}>
           <h1 className={classes.title}>{title}</h1>
           <Slider images={images} slideSize={400} />
@@ -71,11 +89,8 @@ const SingleProduct = () => {
                 currency={"$"}
               />
               <StarRating rating={rating} />
-              <Button onClick={() => {}}>
+              <Button onClick={handleAddToCart}>
                 <img width="36px" src={basketIcon} alt="basket" />
-              </Button>
-              <Button onClick={() => {}}>
-                <img width="36px" src={heartIcon} alt="favorite" />
               </Button>
               <Button onClick={() => {}}>{brand}</Button>
             </div>
@@ -106,7 +121,7 @@ const SingleProduct = () => {
         </section>
         {commentsStatus === "fulfilled" ? (
           <section className={classes.section}>
-            {filteredCommentsData.map((comment) => {
+            {commentsData.map((comment) => {
               return <Comment key={comment.id} comment={comment} />;
             })}
           </section>

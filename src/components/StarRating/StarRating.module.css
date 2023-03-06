@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
     height: min-content;
     width: fit-content;
 }
@@ -10,13 +10,13 @@
 }
 
 .full {
-    background-image: url("full-star.png");
+    background-image: url("icons/full-star.png");
 }
 
 .half {
-    background-image: url("half-star.png");
+    background-image: url("icons/half-star.png");
 }
 
 .empty {
-    background-image: url("empty-star.png");
+    background-image: url("icons/empty-star.png");
 }

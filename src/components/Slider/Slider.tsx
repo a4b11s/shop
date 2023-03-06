@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+
 import classes from "./Slider.module.css";
 
 interface IProps {
   images: Array<string>;
   slideSize: number;
 }
+
 const Slider = (props: IProps) => {
   const { images, slideSize } = props;
+
   const [currentPos, setCurrentPos] = useState(0);
 
   const handleSwipeLeft = () => {
@@ -24,6 +27,7 @@ const Slider = (props: IProps) => {
       setCurrentPos(0);
     }
   };
+
   return (
     <div className={classes.wrapper}>
       <div

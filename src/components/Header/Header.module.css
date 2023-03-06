@@ -1,14 +1,16 @@
-.wrapper{
+.wrapper {
     background-color: var(--primary-color);
     font-size: 20px;
     line-height: 1.6;
     padding: 12px 24px;
     color: white;
 }
-.nav{
+
+.nav {
     width: fit-content;
 }
-.link{
+
+.link {
     color: white;
     text-decoration: none;
     text-transform: uppercase;

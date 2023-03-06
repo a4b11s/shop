@@ -1,4 +1,5 @@
 import React from "react";
+
 import classes from "./StarRating.module.css";
 
 const StarRating = (props: { rating: number }) => {

@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux";
 import { productsSlice } from "./productsSlice";
 import { commentsSlice } from "./commentsSlice";
 import { customerSlice } from "./customerSlice";
+import { categoriesSlice } from "./categoriesSlice";
 
 const rootReducer = combineReducers({
   products: productsSlice.reducer,
   comments: commentsSlice.reducer,
+  categories: categoriesSlice.reducer,
   customer: customerSlice.reducer,
 });
 

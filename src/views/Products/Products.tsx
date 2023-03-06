@@ -1,42 +1,134 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { IRootState } from "../../store/store";
+import { IRootState, useAppDispatch } from "../../store/store";
+import { fetchProducts } from "../../store/productsSlice";
+import { fetchCategories } from "../../store/categoriesSlice";
+import { IProduct } from "../../models";
+
 import ProductCard from "../../components/ProductCard/ProductCard";
-
-import classes from "./Products.module.css";
 import Spinner from "../../components/Spinner/Spinner";
 import Alert from "../../components/Alert/Alert";
+import DropDown from "../../components/DropDown/DropDown";
+import Pagination from "../../components/Pagination/Pagination";
+
+import classes from "./Products.module.css";
 
 const Products = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const brandSearch = searchParams.get("brand");
+  const categorySearch = searchParams.get("category");
+  const [sortBy, setSortBy] = useState<keyof IProduct>("price");
+  const [page, setPage] = useState<number>(1);
+  const sortParam: Array<keyof IProduct> = [
+    "title",
+    "price",
+    "rating",
+    "discountPercentage",
+  ];
 
-  const { data, status, error } = useSelector(
+  const { data, status, error, total, limit } = useSelector(
     (state: IRootState) => state.products
   );
+  const { data: categoriesData, status: categoriesStatus } = useSelector(
+    (state: IRootState) => state.categories
+  );
+
+  useEffect(() => {
+    dispatch(
+      fetchProducts({
+        limit: limit,
+        skip: (page - 1) * limit,
+        category: categorySearch ? categorySearch : undefined,
+      })
+    );
+    dispatch(fetchCategories());
+  }, [dispatch, page, categorySearch, limit]);
+
+  const handleClearSearchParams = () => setSearchParams();
 
   const handleClickOnCard = (id: number) => navigate(`/product/${id}`);
-  const handleClickOnBrand = (brand: string) =>
-    navigate(`/products?brand=${brand}`);
-  const handleClickOnCategory = (category: string) =>
-    navigate(`/products?category=${category}`);
 
-  if (status === "fulfilled" && data.length) {
+  const handleBrandChange = (brand: string) => setSearchParams({ brand });
+
+  const handleCategoryChange = (category: string) => {
+    setSearchParams({ category });
+    setPage(1);
+  };
+
+  if (
+    status === "fulfilled" &&
+    data.length &&
+    categoriesStatus === "fulfilled"
+  ) {
+    const sortedData = [...data].sort((a, b) => {
+      return a[sortBy] < b[sortBy] ? -1 : 1;
+    });
+
     return (
-      <div className={classes.wrapper}>
-        {data.map((item) => {
-          return (
-            <ProductCard
-              handleClickOnCard={handleClickOnCard}
-              handleClickOnBrand={handleClickOnBrand}
-              handleClickOnCategory={handleClickOnCategory}
-              key={item.id}
-              product={item}
+      <>
+        <div className={classes.header}>
+          <div>
+            <span className={classes.label}>Category:</span>
+            <DropDown
+              defaultValue={categorySearch || "all"}
+              options={["all", ...(categoriesData as string[])]}
+              onSelected={(value: string) => {
+                if (value === "all") {
+                  handleClearSearchParams();
+                } else {
+                  handleCategoryChange(value);
+                }
+              }}
             />
-          );
-        })}
-      </div>
+          </div>
+          <div>
+            <span className={classes.label}>Sort by:</span>
+            <DropDown
+              defaultValue={sortBy}
+              options={sortParam}
+              onSelected={(value: keyof IProduct) => {
+                setSortBy(value);
+              }}
+            />
+          </div>
+        </div>
+        <div className={classes.wrapper}>
+          {sortedData.map((item) => {
+            if (brandSearch !== null) {
+              if (item.brand !== brandSearch) {
+                return null;
+              }
+            }
+
+            if (categorySearch !== null) {
+              if (item.category !== categorySearch) {
+                return null;
+              }
+            }
+
+            return (
+              <ProductCard
+                handleClickOnCard={handleClickOnCard}
+                handleClickOnBrand={handleBrandChange}
+                handleClickOnCategory={handleCategoryChange}
+                key={item.id}
+                product={item}
+              />
+            );
+          })}
+        </div>
+        <Pagination
+          count={Math.floor(total / limit)}
+          current={page}
+          onChange={(page: number) => {
+            setPage(page);
+          }}
+        />
+      </>
     );
   } else if (status === "pending") {
     return <Spinner />;

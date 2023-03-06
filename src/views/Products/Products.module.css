@@ -1,5 +1,14 @@
-.wrapper{
+.wrapper {
     display: flex;
     flex-wrap: wrap;
+}
+
+.header {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    margin-right: 14px;
 }

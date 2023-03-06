@@ -1,10 +1,10 @@
 import React from "react";
 
 import classes from "./Alert.module.css";
-import errorIcon from "./error.svg";
-import warningIcon from "./warning.svg";
-import infoIcon from "./info.svg";
-import successIcon from "./success.svg";
+import errorIcon from "./icons/error.svg";
+import warningIcon from "./icons/warning.svg";
+import infoIcon from "./icons/info.svg";
+import successIcon from "./icons/success.svg";
 
 const icons = {
   error: errorIcon,
@@ -21,6 +21,7 @@ interface IProps {
 
 const Alert = (props: IProps) => {
   const { type, isOpen, message } = props;
+
   if (isOpen) {
     return (
       <div className={classes.wrapper + " " + classes[type]}>
