@@ -1,0 +1,38 @@
+.wrapper {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+}
+
+.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+.navBtn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.currentPage {
+    color: white;
+    background: var(--primary-color);
+}
