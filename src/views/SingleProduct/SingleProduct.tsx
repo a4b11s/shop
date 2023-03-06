@@ -120,11 +120,15 @@ const SingleProduct = () => {
           </div>
         </section>
         {commentsStatus === "fulfilled" ? (
-          <section className={classes.section}>
-            {commentsData.map((comment) => {
-              return <Comment key={comment.id} comment={comment} />;
-            })}
-          </section>
+          commentsData.length ? (
+            <section className={classes.section}>
+              {commentsData.map((comment) => {
+                return <Comment key={comment.id} comment={comment} />;
+              })}
+            </section>
+          ) : (
+            ""
+          )
         ) : (
           <Spinner />
         )}
