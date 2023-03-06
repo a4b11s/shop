@@ -6,7 +6,7 @@ const StarRating = (props: { rating: number }) => {
 
   return (
     <div className={classes.wrapper}>
-      {[...Array(5)].map((item, index) => {
+      {[...Array(5)].map((_, index) => {
         if (Math.floor(rating) > index) {
           return (
             <span
