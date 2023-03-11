@@ -19,9 +19,7 @@ interface IProps {
   type: "error" | "warning" | "info" | "success";
 }
 
-const Alert = (props: IProps) => {
-  const { type, isOpen, message } = props;
-
+const Alert = ({ type, isOpen, message }: IProps) => {
   if (isOpen) {
     return (
       <div className={classes.wrapper + " " + classes[type]}>

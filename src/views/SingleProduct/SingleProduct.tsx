@@ -26,7 +26,9 @@ import { fetchSingleProducts } from "../../store/productsSlice";
 const SingleProduct = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+
   const [isShowAddToCartAlert, setIsShowAddToCartAlert] = useState(false);
+
   const {
     data: productsData,
     status: productsStatus,
@@ -45,10 +47,11 @@ const SingleProduct = () => {
     if (id) {
       if (!product) {
         dispatch(fetchSingleProducts(parseInt(id)));
+      } else {
+        dispatch(fetchComments(parseInt(id)));
       }
-      dispatch(fetchComments(parseInt(id)));
     }
-  }, [dispatch, id]);
+  }, [product, dispatch, id]);
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));

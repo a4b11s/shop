@@ -11,12 +11,15 @@ import classes from "./ProductListItem.module.css";
 interface IProps {
   product: IProduct;
   countInCart?: number | undefined;
-  changeCountInCart?: Function;
-  delFromCart?: Function;
+  onChangeCountInCart?: Function;
+  onDelFromCart?: Function;
 }
-const ProductListItem = (props: IProps) => {
-  const { product, countInCart, changeCountInCart, delFromCart } = props;
-
+const ProductListItem = ({
+  product,
+  countInCart,
+  onChangeCountInCart,
+  onDelFromCart,
+}: IProps) => {
   const { id, title, discountPercentage, rating, thumbnail, price, stock } =
     product;
 
@@ -32,12 +35,12 @@ const ProductListItem = (props: IProps) => {
         />
         <StarRating rating={rating} />
       </div>
-      {changeCountInCart && countInCart ? (
+      {onChangeCountInCart && countInCart ? (
         <div className={classes.countInCart}>
           <Button
             disabled={countInCart <= 1}
             onClick={() => {
-              changeCountInCart(id, countInCart - 1);
+              onChangeCountInCart(id, countInCart - 1);
             }}
           >
             -
@@ -46,7 +49,7 @@ const ProductListItem = (props: IProps) => {
           <Button
             disabled={countInCart >= stock}
             onClick={() => {
-              changeCountInCart(id, countInCart + 1);
+              onChangeCountInCart(id, countInCart + 1);
             }}
           >
             +
@@ -55,10 +58,10 @@ const ProductListItem = (props: IProps) => {
       ) : (
         ""
       )}
-      {delFromCart && (
+      {onDelFromCart && (
         <Button
           onClick={() => {
-            delFromCart(id);
+            onDelFromCart(id);
           }}
         >
           X

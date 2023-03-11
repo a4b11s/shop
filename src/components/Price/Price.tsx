@@ -6,9 +6,7 @@ interface IProps {
   discountPercentage: number;
   currency: string;
 }
-const Price = (props: IProps) => {
-  const { price, discountPercentage, currency } = props;
-
+const Price = ({ price, discountPercentage, currency }: IProps) => {
   const isDiscount = discountPercentage > 0;
   const oldPrice = ((price / 100) * discountPercentage + price).toFixed(2);
 

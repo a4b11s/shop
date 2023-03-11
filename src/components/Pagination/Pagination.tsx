@@ -9,9 +9,7 @@ interface IProps {
   current: number;
   onChange?: Function;
 }
-const Pagination = (props: IProps) => {
-  const { count, current, onChange } = props;
-
+const Pagination = ({ count, current, onChange }: IProps) => {
   const changePage = (newPage: number) => {
     onChange && onChange(newPage);
   };

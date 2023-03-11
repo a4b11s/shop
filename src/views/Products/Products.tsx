@@ -19,10 +19,13 @@ const Products = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+
   const brandSearch = searchParams.get("brand");
   const categorySearch = searchParams.get("category");
+
   const [sortBy, setSortBy] = useState<keyof IProduct>("price");
   const [page, setPage] = useState<number>(1);
+
   const sortParam: Array<keyof IProduct> = [
     "title",
     "price",
@@ -112,9 +115,9 @@ const Products = () => {
 
             return (
               <ProductCard
-                handleClickOnCard={handleClickOnCard}
-                handleClickOnBrand={handleBrandChange}
-                handleClickOnCategory={handleCategoryChange}
+                onClickOnCard={handleClickOnCard}
+                onClickOnBrand={handleBrandChange}
+                onClickOnCategory={handleCategoryChange}
                 key={item.id}
                 product={item}
               />

@@ -7,9 +7,7 @@ interface IProps {
   slideSize: number;
 }
 
-const Slider = (props: IProps) => {
-  const { images, slideSize } = props;
-
+const Slider = ({ images, slideSize }: IProps) => {
   const [currentPos, setCurrentPos] = useState(0);
 
   const handleSwipeLeft = () => {

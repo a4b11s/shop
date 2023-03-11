@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import cnBind from "classnames/bind";
+
 import classes from "./DropDown.module.css";
 
 interface IProps {
@@ -9,24 +11,25 @@ interface IProps {
   defaultValue?: string;
 }
 
+const cx = cnBind.bind(classes);
+
 const calcWidth = (array: Array<string>): number => {
   const wordLength = Math.max(...array.map((el) => el.length)); // calc length of the largest word in the array
 
   return wordLength * 10;
 };
 
-const DropDown = (props: IProps) => {
-  const {
-    disabled = false,
-    options,
-    defaultValue = options[0],
-    onSelected,
-  } = props;
-
+const DropDown = ({
+  disabled = false,
+  options,
+  defaultValue = options[0],
+  onSelected,
+}: IProps) => {
   const [selectedValue, setSelectedValue] = useState(defaultValue);
   const [isSelecting, setIsSelecting] = useState(false);
 
-  const dropDownWidth = calcWidth([...options, defaultValue]); //width DropDown, based on the largest option
+  //width DropDown, based on the largest option
+  const dropDownWidth = calcWidth([...options, defaultValue]);
 
   const handleClickOnItem = (value: string) => {
     setSelectedValue(value);
@@ -39,12 +42,13 @@ const DropDown = (props: IProps) => {
 
   const handleClickOnDropDownBtn = () => setIsSelecting(!isSelecting);
 
+  const classNames = cx({
+    dropDown: true,
+    dropDownActive: isSelecting,
+  });
+
   return (
-    <div
-      className={[classes.dropDown, isSelecting && classes.dropDownActive].join(
-        " "
-      )}
-    >
+    <div className={classNames}>
       <button
         disabled={disabled}
         onClick={handleClickOnDropDownBtn}
@@ -55,13 +59,15 @@ const DropDown = (props: IProps) => {
       </button>
       <ul className={classes.optionsList}>
         {options.map((option, index) => {
+          const classNames = cx({
+            optionsListItem: true,
+            optionsListItemActive: option === selectedValue,
+          });
+
           return (
             <li
               style={{ width: dropDownWidth }}
-              className={[
-                classes.optionsListItem,
-                option === selectedValue && classes.optionsListItemActive,
-              ].join(" ")}
+              className={classNames}
               key={option + index.toString()}
               onClick={() => handleClickOnItem(option)}
             >

@@ -1,10 +1,10 @@
 import React from "react";
 
 import classes from "./StarRating.module.css";
-
-const StarRating = (props: { rating: number }) => {
-  const { rating } = props;
-
+interface IProps {
+  rating: number;
+}
+const StarRating = ({ rating }: IProps) => {
   return (
     <div className={classes.wrapper}>
       {[...Array(5)].map((_, index) => {

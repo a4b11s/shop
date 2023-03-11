@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProduct } from "../models";
 
-interface ICart {
+export interface ICart {
   product: IProduct;
   count: number;
 }

@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IRootState, useAppDispatch } from "../../store/store";
-import { changeCountInCart, delFromCart } from "../../store/customerSlice";
+import {
+  changeCountInCart,
+  delFromCart,
+  ICart,
+} from "../../store/customerSlice";
 
 import ProductListItem from "../../components/ProductListItem/ProductListItem";
 import Price from "../../components/Price/Price";
 
 import classes from "./Cart.module.css";
 
+const sumProductPrice = (product: Array<ICart>): number => {
+  let sum = 0;
+  product.forEach((item) => {
+    sum += item.product.price * item.count;
+  });
+  return sum;
+};
+
 const Cart = () => {
   const dispatch = useAppDispatch();
   const cart = useSelector((state: IRootState) => state.customer.cart);
-  let cartPrice = 0;
-  cart.forEach((value) => (cartPrice += value.product.price * value.count));
+  const [cartPrice, setCartPrice] = useState(0);
+
+  useEffect(() => {
+    setCartPrice(sumProductPrice(cart));
+  }, [cart]);
 
   const handleChangeCountInCart = (productId: number, newCount: number) => {
     dispatch(changeCountInCart({ newCount, productId }));
@@ -27,10 +42,10 @@ const Cart = () => {
       {cart.map(({ product, count }) => (
         <ProductListItem
           key={product.title + product.id}
-          changeCountInCart={handleChangeCountInCart}
+          onChangeCountInCart={handleChangeCountInCart}
           countInCart={count}
           product={product}
-          delFromCart={handleDelFromCart}
+          onDelFromCart={handleDelFromCart}
         />
       ))}
 

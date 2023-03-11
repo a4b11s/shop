@@ -4,8 +4,11 @@ import { IComment } from "../../models";
 
 import classes from "./Comment.module.css";
 
-const Comment = (props: { comment: IComment }) => {
-  const { user, body } = props.comment;
+interface IProps {
+  comment: IComment;
+}
+const Comment = ({ comment }: IProps) => {
+  const { user, body } = comment;
 
   return (
     <div className={classes.wrapper}>

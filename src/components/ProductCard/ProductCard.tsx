@@ -10,12 +10,17 @@ import classes from "./ProductCard.module.css";
 
 interface IProps {
   product: IProduct;
-  handleClickOnCard: Function;
-  handleClickOnBrand: Function;
-  handleClickOnCategory: Function;
+  onClickOnCard: Function;
+  onClickOnBrand: Function;
+  onClickOnCategory: Function;
 }
 
-const ProductCard = (props: IProps) => {
+const ProductCard = ({
+  product,
+  onClickOnCategory,
+  onClickOnCard,
+  onClickOnBrand,
+}: IProps) => {
   const {
     id,
     title,
@@ -25,15 +30,28 @@ const ProductCard = (props: IProps) => {
     price,
     rating,
     thumbnail,
-  } = props.product;
+  } = product;
+
+  const handleClickOnCard = () => {
+    onClickOnCard(id);
+  };
+
+  const handleClickOnBrand = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    onClickOnBrand(brand);
+  };
+
+  const handleClickOnCategory = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    onClickOnCategory(category);
+  };
 
   return (
-    <div
-      onClick={() => {
-        props.handleClickOnCard(id);
-      }}
-      className={classes.cardWrapper}
-    >
+    <div onClick={handleClickOnCard} className={classes.cardWrapper}>
       <div className={classes.cardMedia}>
         <img alt="Thumbnail" src={thumbnail} />
       </div>
@@ -47,22 +65,8 @@ const ProductCard = (props: IProps) => {
         <StarRating rating={rating} />
       </div>
       <div className={classes.cardFooter}>
-        <Button
-          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-            e.stopPropagation();
-            props.handleClickOnBrand(brand);
-          }}
-        >
-          {brand}
-        </Button>
-        <Button
-          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-            e.stopPropagation();
-            props.handleClickOnCategory(category);
-          }}
-        >
-          {category}
-        </Button>
+        <Button onClick={handleClickOnBrand}>{brand}</Button>
+        <Button onClick={handleClickOnCategory}>{category}</Button>
       </div>
     </div>
   );

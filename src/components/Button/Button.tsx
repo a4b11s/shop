@@ -7,9 +7,7 @@ interface IProps {
   onClick: Function;
   disabled?: boolean;
 }
-const Button = (props: IProps) => {
-  const { disabled, onClick, children } = props;
-
+const Button = ({ disabled, onClick, children }: IProps) => {
   return (
     <button
       disabled={disabled}
