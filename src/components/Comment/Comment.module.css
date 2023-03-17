@@ -7,7 +7,7 @@
 }
 
 .header {
-    border: 2px solid rgb(233, 233, 233);
+    border: 2px solid rgb(233 233 233);
     padding: 6px;
 }
 
@@ -37,6 +37,6 @@
 .body {
     font-size: 16px;
     padding: 26px;
-    border: 2px solid rgb(233, 233, 233);
+    border: 2px solid rgb(233 233 233);
     border-top: none;
 }

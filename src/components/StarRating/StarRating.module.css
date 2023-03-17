@@ -1,6 +1,6 @@
 .wrapper {
-    height: min-content;
     width: fit-content;
+    height: min-content;
 }
 
 .star {

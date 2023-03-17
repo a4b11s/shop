@@ -46,4 +46,5 @@ shouldn’t feel obligated to use this feature. However we understand that this 
 customize it when you are ready for it.
 
 ## .env
+
 Use .env.example

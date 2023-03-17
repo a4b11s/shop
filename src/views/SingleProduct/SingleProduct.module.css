@@ -3,7 +3,8 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.title{
+
+.title {
     margin: 10px 0;
     flex-basis: 100%;
 }
@@ -12,11 +13,11 @@
     flex-basis: 60%;
 }
 
-.section{
+.section {
     margin-top: 20px;
     padding: 18px;
     box-shadow: 0 3px 1px -2px rgb(0 0 0 / 14%), 0 2px 2px 0 rgb(0 0 0 / 8%), 0 1px 5px 0 rgb(0 0 0 / 8%);
-    border: 1px solid rgb(233, 233, 233, 0.4);
+    border: 1px solid rgb(233 233 233 / 40%);
 }
 
 #action {
@@ -29,12 +30,12 @@
     list-style: none;
 }
 
-#info li:first-child{
-    margin-top: 0;
+#info li {
+    margin-top: 12px;
 }
 
-#info li{
-    margin-top: 12px;
+#info li:first-child {
+    margin-top: 0;
 }
 
 #info span {
