@@ -1,16 +1,16 @@
 import React from 'react';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
 import classes from './Alert.module.css';
-import errorIcon from './icons/error.svg';
-import warningIcon from './icons/warning.svg';
-import infoIcon from './icons/info.svg';
-import successIcon from './icons/success.svg';
 
 const icons = {
-	error: errorIcon,
-	warning: warningIcon,
-	info: infoIcon,
-	success: successIcon,
+	error: <ErrorOutlineIcon />,
+	warning: <WarningAmberIcon />,
+	info: <InfoOutlinedIcon />,
+	success: <CheckCircleOutlineOutlinedIcon />,
 };
 
 interface IProps {
@@ -23,7 +23,7 @@ const Alert = ({ type, isOpen, message }: IProps) => {
 	if (isOpen) {
 		return (
 			<div className={classes.wrapper + ' ' + classes[type]}>
-				<img className={classes.icon} src={icons[type]} alt="alert" />
+				{icons[type]}
 				<span>{message ? message : 'Error'}!</span>
 			</div>
 		);
