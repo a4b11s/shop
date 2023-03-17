@@ -1,22 +1,12 @@
 .wrapper {
     width: fit-content;
     height: min-content;
+    display: flex;
+    align-content: center;
 }
 
-.star {
+.wrapper svg {
     width: 24px;
     height: 24px;
-    display: inline-block;
-}
-
-.full {
-    background-image: url("icons/full-star.png");
-}
-
-.half {
-    background-image: url("icons/half-star.png");
-}
-
-.empty {
-    background-image: url("icons/empty-star.png");
+    display: block;
 }

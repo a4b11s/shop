@@ -1,28 +1,19 @@
 import React from 'react';
 
 import classes from './StarRating.module.css';
+import Star from './Star';
 
 interface IProps {
 	rating: number;
 }
 
 const StarRating = ({ rating }: IProps) => {
+	rating = 3.4;
 	return (
 		<div className={classes.wrapper}>
 			{[...Array(5)].map((_, index) => {
-				if (Math.floor(rating) > index) {
-					return (
-						<span key={index} className={classes.star + ' ' + classes.full}></span>
-					);
-				} else if (rating > index && rating < index + 1) {
-					return (
-						<span key={index} className={classes.star + ' ' + classes.half}></span>
-					);
-				} else {
-					return (
-						<span key={index} className={classes.star + ' ' + classes.empty}></span>
-					);
-				}
+				if (rating >= index && rating <= index + 1) return <Star type={'half'} />;
+				return <Star type={index < Math.floor(rating) ? 'full' : 'empty'} />;
 			})}
 		</div>
 	);
