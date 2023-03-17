@@ -30,6 +30,14 @@
     list-style: none;
 }
 
+#info svg{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
 #info li {
     margin-top: 12px;
 }

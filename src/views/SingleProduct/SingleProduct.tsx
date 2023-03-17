@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
+import SafetyCheckOutlinedIcon from '@mui/icons-material/SafetyCheckOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import { fetchComments } from '../../store/commentsSlice';
 import { addToCart } from '../../store/customerSlice';
@@ -15,11 +20,6 @@ import { IRootState, useAppDispatch } from '../../store/store';
 import { fetchSingleProducts } from '../../store/productsSlice';
 
 import classes from './SingleProduct.module.css';
-import categoryIcon from './icons/category.svg';
-import warrantyIcon from './icons/warranty.svg';
-import truckIcon from './icons/truck.svg';
-import stockIcon from './icons/stock.svg';
-import basketIcon from './icons/basket.svg';
 
 const SingleProduct = () => {
 	const { id } = useParams();
@@ -91,27 +91,27 @@ const SingleProduct = () => {
 							/>
 							<StarRating rating={rating} />
 							<Button onClick={handleAddToCart}>
-								<img width="36px" src={basketIcon} alt="basket" />
+								<ShoppingCartOutlinedIcon />
 							</Button>
 							<Button onClick={() => {}}>{brand}</Button>
 						</div>
 						<ul id={classes.info} className={classes.section}>
 							<li>
-								<img src={stockIcon} width="36px" alt="stock" />
+								<Inventory2OutlinedIcon />
 								<span>In stock {stock}</span>
 							</li>
 							<li>
-								<img src={categoryIcon} width="36px" alt="category" />
+								<CategoryOutlinedIcon />
 								<span>
 									In category <Button onClick={() => {}}>{category}</Button>
 								</span>
 							</li>
 							<li>
-								<img src={warrantyIcon} width="36px" alt="warranty" />
+								<SafetyCheckOutlinedIcon />
 								<span>Warranty one year</span>
 							</li>
 							<li>
-								<img width="36px" src={truckIcon} alt="delivery" />
+								<LocalShippingOutlinedIcon />
 								<span>Delivery in 3 days from the moment of the order</span>
 							</li>
 						</ul>
