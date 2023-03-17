@@ -12,26 +12,34 @@
     --xl: 1536px;
 }
 
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .container {
-    max-width: var(--xl);
+    flex-grow: 1;
+    width: var(--xl);
     margin: 20px auto 0;
 }
 
 @media screen and (max-device-width: 1536px) {
     .container {
-        max-width: var(--lg);
+        width: var(--lg);
     }
 }
 
 @media screen and (max-device-width: 1200px) {
     .container {
-        max-width: var(--md);
+        width: var(--md);
     }
 }
 
 
 @media screen and (max-device-width: 900px) {
     .container {
-        max-width: var(--sm);
+        width: var(--sm);
     }
 }
