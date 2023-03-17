@@ -1,15 +1,16 @@
+.title {
+    margin: 10px 0;
+    flex-basis: 100%;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.title {
-    margin: 10px 0;
-    flex-basis: 100%;
-}
-
 .leftBar {
+    font-size: 20px;
     flex-basis: 60%;
 }
 
@@ -30,7 +31,7 @@
     list-style: none;
 }
 
-#info svg{
+#info svg {
     display: inline-block;
     width: 28px;
     height: 28px;
@@ -55,3 +56,22 @@
     display: inline-block;
     margin-right: 10px;
 }
+
+@media screen and (min-device-width: 1536px) {
+    .leftBar {
+        flex-basis: 70%;
+    }
+}
+
+@media screen and (max-device-width: 1200px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .leftBar {
+        flex-basis: 100%;
+        width: 100%;
+    }
+}
+

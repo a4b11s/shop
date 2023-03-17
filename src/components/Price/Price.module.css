@@ -14,7 +14,7 @@
 .price {
     width: fit-content;
     display: block;
-    font-size: 20px;
+    font-size: inherit;
     font-weight: 500;
 }
 

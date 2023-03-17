@@ -1,8 +1,8 @@
 .cardWrapper {
-    width: 350px;
+    width: calc((100% / 4) - 10px);
     box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
     border-radius: 16px;
-    margin: 16px 8px;
+    margin: 16px 0;
     padding: 16px 16px 0;
     cursor: pointer;
     transition: box-shadow ease-in-out 0.2s;
@@ -50,3 +50,22 @@
     padding: 16px;
 }
 
+
+@media screen and (max-device-width: 1536px) {
+    .cardWrapper {
+        width: calc((100% / 3) - 10px);
+    }
+}
+
+@media screen and (max-device-width: 1200px) {
+    .cardWrapper {
+        width: calc((100% / 2) - 10px);
+    }
+}
+
+
+@media screen and (max-device-width: 900px) {
+    .cardWrapper {
+        width: calc(100% - 10px);
+    }
+}
