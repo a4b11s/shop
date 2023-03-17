@@ -43,10 +43,10 @@ const SingleProduct = () => {
 
 	useEffect(() => {
 		if (id) {
-			if (!product) {
-				dispatch(fetchSingleProducts(parseInt(id)));
-			} else {
+			if (product) {
 				dispatch(fetchComments(parseInt(id)));
+			} else {
+				dispatch(fetchSingleProducts(parseInt(id)));
 			}
 		}
 	}, [product, dispatch, id]);
@@ -58,6 +58,11 @@ const SingleProduct = () => {
 			setIsShowAddToCartAlert(false);
 		}, 1500);
 	};
+
+	if (productsStatus === 'rejected')
+		return <Alert type="error" isOpen={true} message={productsError} />;
+
+	if (productsStatus === 'pending') return <Spinner />;
 
 	if (productsStatus === 'fulfilled' && id && product) {
 		const {
@@ -120,26 +125,18 @@ const SingleProduct = () => {
 						</div>
 					</div>
 				</section>
-				{commentsStatus === 'fulfilled' ? (
-					commentsData.length ? (
-						<section className={classes.section}>
-							{commentsData.map((comment) => {
-								return <Comment key={comment.id} comment={comment} />;
-							})}
-						</section>
-					) : (
-						''
-					)
-				) : (
-					<Spinner />
+				{!(commentsStatus === 'fulfilled' && commentsData.length) || (
+					<section className={classes.section}>
+						{commentsData.map((comment) => {
+							return <Comment key={comment.id} comment={comment} />;
+						})}
+					</section>
 				)}
 			</>
 		);
-	} else if (productsStatus === 'pending') {
-		return <Spinner />;
-	} else {
-		return <Alert type="error" isOpen={true} message={productsError} />;
 	}
+
+	return <Alert type="error" isOpen={true} message={'Error'} />;
 };
 
 export default SingleProduct;

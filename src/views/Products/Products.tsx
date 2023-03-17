@@ -61,6 +61,11 @@ const Products = () => {
 		setPage(1);
 	};
 
+	if (status === 'pending') return <Spinner />;
+
+	if (status === 'rejected')
+		return <Alert type="error" isOpen={true} message={error} />;
+
 	if (
 		status === 'fulfilled' &&
 		data.length &&
@@ -132,11 +137,9 @@ const Products = () => {
 				/>
 			</>
 		);
-	} else if (status === 'pending') {
-		return <Spinner />;
-	} else {
-		return <Alert type="error" isOpen={true} message={error} />;
 	}
+
+	return <Alert type="error" isOpen={true} message={'Error'} />;
 };
 
 export default Products;
