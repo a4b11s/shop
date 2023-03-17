@@ -1,4 +1,5 @@
 import React from 'react';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 import { IProduct } from '../../models';
 import Price from '../Price/Price';
@@ -60,7 +61,7 @@ const ProductListItem = ({
 						onDelFromCart(id);
 					}}
 				>
-					X
+					<DeleteForeverOutlinedIcon />
 				</Button>
 			)}
 		</div>
