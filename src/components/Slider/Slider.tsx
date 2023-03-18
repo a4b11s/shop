@@ -12,6 +12,10 @@ interface IProps {
 const Slider = ({ images, slideSize }: IProps) => {
 	const [currentPos, setCurrentPos] = useState(0);
 
+	const sliderHeight = slideSize - slideSize / 4; // 1/4 sliderWidth
+
+	const miniatureWidth = slideSize / (images.length + 2); // 2 it is spaces between miniatures. Mean spaces is 2 miniature size
+
 	const handleSwipeLeft = () => {
 		if (currentPos > 0) {
 			setCurrentPos(currentPos - 1);
@@ -32,10 +36,10 @@ const Slider = ({ images, slideSize }: IProps) => {
 		<div className={classes.wrapper}>
 			<div
 				className={classes.slider}
-				style={{ width: slideSize, height: slideSize - slideSize / 4 }}
+				style={{ width: slideSize, height: sliderHeight }}
 			>
 				<div
-					style={{ width: slideSize, height: slideSize - slideSize / 4 }}
+					style={{ width: slideSize, height: sliderHeight }}
 					className={classes.holder}
 				>
 					<ul
@@ -50,7 +54,7 @@ const Slider = ({ images, slideSize }: IProps) => {
 									key={img}
 									style={{
 										width: slideSize,
-										height: slideSize - slideSize / 4,
+										height: sliderHeight,
 									}}
 									className={classes.slide}
 								>
@@ -80,12 +84,10 @@ const Slider = ({ images, slideSize }: IProps) => {
 					return (
 						<li
 							key={img + 'miniature'}
-							style={{ width: slideSize / (images.length + 2) }}
-							className={
-								classes.minSlide +
-								' ' +
-								(index === currentPos ? classes.minSlideActive : '')
-							}
+							style={{ width: miniatureWidth }}
+							className={`${classes.minSlide} ${
+								index === currentPos ? classes.minSlideActive : ''
+							}`}
 							onClick={() => {
 								setCurrentPos(index);
 							}}
