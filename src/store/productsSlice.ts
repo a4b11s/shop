@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { IProduct } from '../models';
+import { fetchProducts, fetchSingleProducts } from '../services/api';
 
 interface IState {
 	data: Array<IProduct>;
@@ -9,54 +10,6 @@ interface IState {
 	status: 'pending' | 'fulfilled' | 'rejected' | null;
 	error: string | null;
 }
-
-interface IFetchResponse {
-	products: Array<IProduct>;
-	total: number;
-	limit: number;
-	skip: number;
-}
-
-interface IFetchPayload {
-	limit: number;
-	skip: number;
-	category?: string;
-}
-
-const apiUrl = process.env.REACT_APP_API_HOST;
-
-export const fetchProducts = createAsyncThunk<
-	IFetchResponse,
-	IFetchPayload,
-	{ rejectValue: string }
->('products/fetchPosts', async function (params, { rejectWithValue }) {
-	const response = await fetch(
-		(apiUrl as string) +
-			`products${params.category ? '/category/' + params.category : ''}?limit=${
-				params.limit
-			}&skip=${params.skip}`
-	);
-
-	if (response.ok) {
-		return await response.json();
-	} else {
-		return rejectWithValue('Server error');
-	}
-});
-
-export const fetchSingleProducts = createAsyncThunk<
-	IProduct,
-	number,
-	{ rejectValue: string }
->('product/fetchSingleProducts', async function (id, { rejectWithValue }) {
-	const response = await fetch((apiUrl as string) + `products/${id}`);
-
-	if (response.ok) {
-		return await response.json();
-	} else {
-		return rejectWithValue('Server error');
-	}
-});
 
 const initialState: IState = {
 	data: [],

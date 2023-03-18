@@ -1,26 +1,12 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { fetchCategories } from '../services/api';
 
 interface IState {
 	data: Array<String>;
 	status: 'pending' | 'fulfilled' | 'rejected' | null;
 	error: string | null;
 }
-
-const apiUrl = process.env.REACT_APP_API_HOST;
-
-export const fetchCategories = createAsyncThunk<
-	Array<String>,
-	undefined,
-	{ rejectValue: string }
->('categories/fetchCategories', async function (_, { rejectWithValue }) {
-	const response = await fetch((apiUrl as string) + 'products/categories');
-
-	if (response.ok) {
-		return await response.json();
-	} else {
-		return rejectWithValue('Server error');
-	}
-});
 
 const initialState: IState = {
 	data: [],

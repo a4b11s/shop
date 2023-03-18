@@ -7,7 +7,8 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
-import { fetchComments } from '../../store/commentsSlice';
+import { fetchComments } from '../../services/api';
+import { fetchSingleProducts } from '../../services/api';
 import { addToCart } from '../../store/customerSlice';
 import Price from '../../components/Price/Price';
 import StarRating from '../../components/StarRating/StarRating';
@@ -17,7 +18,6 @@ import Comment from '../../components/Comment/Comment';
 import Spinner from '../../components/Spinner/Spinner';
 import Alert from '../../components/Alert/Alert';
 import { IRootState, useAppDispatch } from '../../store/store';
-import { fetchSingleProducts } from '../../store/productsSlice';
 
 import classes from './SingleProduct.module.css';
 

@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 
 import { IRootState, useAppDispatch } from '../../store/store';
-import { fetchProducts } from '../../store/productsSlice';
-import { fetchCategories } from '../../store/categoriesSlice';
+import { fetchProducts } from '../../services/api';
+import { fetchCategories } from '../../services/api';
 import { IProduct } from '../../models';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Spinner from '../../components/Spinner/Spinner';

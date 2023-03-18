@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { IComment } from '../models';
+import { fetchComments } from '../services/api';
 
 interface IState {
 	data: Array<IComment>;
@@ -8,31 +9,6 @@ interface IState {
 	status: 'pending' | 'fulfilled' | 'rejected' | null;
 	error: string | null;
 }
-
-interface IFetchResponse {
-	comments: Array<IComment>;
-	total: number;
-	limit: number;
-	skip: number;
-}
-
-const apiUrl = process.env.REACT_APP_API_HOST;
-
-export const fetchComments = createAsyncThunk<
-	IFetchResponse,
-	number,
-	{ rejectValue: string }
->('comments/fetchComments', async function (productId, { rejectWithValue }) {
-	const response = await fetch(
-		(apiUrl as string) + `comments/post/${productId}`
-	);
-
-	if (response.ok) {
-		return await response.json();
-	} else {
-		return rejectWithValue('Server error');
-	}
-});
 
 const initialState: IState = {
 	data: [],
