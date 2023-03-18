@@ -1,7 +1,14 @@
 import React from 'react';
 
 const Footer = () => {
-	return <footer style={{ marginTop: 15, textAlign: 'center' }}>@2023</footer>;
+	const createdYear = 2023;
+	const yearNow = new Date(Date.now()).getFullYear();
+
+	return (
+		<footer style={{ margin: 20, textAlign: 'center' }}>
+			{createdYear === yearNow ? yearNow : `${createdYear} - ${yearNow}`}
+		</footer>
+	);
 };
 
 export default Footer;
