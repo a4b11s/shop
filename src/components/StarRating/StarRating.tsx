@@ -12,7 +12,12 @@ const StarRating = ({ rating }: IProps) => {
 		<div className={classes.wrapper}>
 			{[...Array(5)].map((_, index) => {
 				if (rating >= index && rating <= index + 1) return <Star type={'half'} />;
-				return <Star type={index < Math.floor(rating) ? 'full' : 'empty'} />;
+				return (
+					<Star
+						key={index + 'Rating'}
+						type={index < Math.floor(rating) ? 'full' : 'empty'}
+					/>
+				);
 			})}
 		</div>
 	);
