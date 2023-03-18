@@ -129,7 +129,7 @@ const Products = () => {
 					})}
 				</div>
 				<Pagination
-					count={Math.floor(total / limit)}
+					count={Math.ceil(total / limit)}
 					current={page}
 					onChange={(page: number) => {
 						setPage(page);
