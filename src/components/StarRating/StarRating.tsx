@@ -8,7 +8,6 @@ interface IProps {
 }
 
 const StarRating = ({ rating }: IProps) => {
-	rating = 3.4;
 	return (
 		<div className={classes.wrapper}>
 			{[...Array(5)].map((_, index) => {

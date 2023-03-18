@@ -61,7 +61,7 @@ export const fetchSingleProducts = createAsyncThunk<
 const initialState: IState = {
 	data: [],
 	total: 0,
-	limit: 10,
+	limit: 12,
 	status: null,
 	error: null,
 };
