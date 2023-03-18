@@ -128,13 +128,15 @@ const Products = () => {
 						);
 					})}
 				</div>
-				<Pagination
-					count={Math.ceil(total / limit)}
-					current={page}
-					onChange={(page: number) => {
-						setPage(page);
-					}}
-				/>
+				{Math.ceil(total / limit) > 1 && (
+					<Pagination
+						count={Math.ceil(total / limit)}
+						current={page}
+						onChange={(page: number) => {
+							setPage(page);
+						}}
+					/>
+				)}
 			</>
 		);
 	}
