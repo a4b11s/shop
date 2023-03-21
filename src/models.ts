@@ -29,3 +29,11 @@ export interface IComment {
 		username: string;
 	};
 }
+
+export interface IUser {
+	displayName: string | null;
+	email: string | null;
+	accessToken: string | null;
+	uid: string | null;
+	photoURL: string | null;
+}
