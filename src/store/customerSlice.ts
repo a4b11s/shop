@@ -71,5 +71,10 @@ export const customerSlice = createSlice({
 	},
 });
 
-export const { addToCart, delFromCart, changeCountInCart, addUser, removeUse } =
-	customerSlice.actions;
+export const {
+	addToCart,
+	delFromCart,
+	changeCountInCart,
+	addUser,
+	removeUser,
+} = customerSlice.actions;
