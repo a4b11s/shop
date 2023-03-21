@@ -1,0 +1,40 @@
+.menuItemList {
+    background: white;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    right: 50%;
+    z-index: 100;
+    box-shadow: rgb(0 0 0 / 20%) 0 5px 5px -3px, rgb(0 0 0 / 14%) 0 8px 10px 1px, rgb(0 0 0 / 12%) 0 3px 14px 2px;
+    transform-origin: top;
+    transform: scaleY(0) translateX(50%);
+    transition: transform, opacity 267ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 178ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    width: max-content;
+    color: black;
+}
+
+.menuItemListActive {
+    display: block;
+    opacity: 1;
+    transform: scaleX(1) translateY(0) translateX(50%);
+}
+
+.menuItem {
+    text-align: center;
+    width: 100%;
+    background: white;
+    text-transform: capitalize;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.menuItem:hover {
+    background-color: rgb(25 118 210 / 8%);
+}
+
+.user {
+    position: relative;
+}
