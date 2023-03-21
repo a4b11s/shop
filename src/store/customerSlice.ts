@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IProduct } from '../models';
+import { IProduct, IUser } from '../models';
 
 export interface ICart {
 	product: IProduct;
@@ -9,10 +9,18 @@ export interface ICart {
 
 interface IState {
 	cart: Array<ICart>;
+	user: IUser;
 }
 
 const initialState: IState = {
 	cart: [],
+	user: {
+		uid: null,
+		email: null,
+		accessToken: null,
+		displayName: null,
+		photoURL: null,
+	},
 };
 
 export const customerSlice = createSlice({
@@ -44,13 +52,24 @@ export const customerSlice = createSlice({
 				const productIndex = state.cart.findIndex(
 					(products) => products.product.id === productId
 				);
-				if (newCount <= state.cart[productIndex].product.stock) {
+				if (newCount <= state.cart[productIndex].product.stock)
 					state.cart[productIndex].count = newCount;
-				}
 			}
+		},
+		addUser: (state, action: PayloadAction<IUser>) => {
+			state.user = action.payload;
+		},
+		removeUser: (state) => {
+			state.user = {
+				uid: null,
+				accessToken: null,
+				email: null,
+				displayName: null,
+				photoURL: nul,
+			};
 		},
 	},
 });
 
-export const { addToCart, delFromCart, changeCountInCart } =
+export const { addToCart, delFromCart, changeCountInCart, addUser, removeUse } =
 	customerSlice.actions;
