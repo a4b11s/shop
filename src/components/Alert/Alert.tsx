@@ -1,4 +1,5 @@
 import React from 'react';
+import cnBind from 'classnames/bind';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -19,10 +20,17 @@ interface IProps {
 	type: 'error' | 'warning' | 'info' | 'success';
 }
 
+const cx = cnBind.bind(classes);
+
 const Alert = ({ type, isOpen, message }: IProps) => {
 	if (isOpen) {
 		return (
-			<div className={classes.wrapper + ' ' + classes[type]}>
+			<div
+				className={cx({
+					wrapper: true,
+					[type]: true,
+				})}
+			>
 				{icons[type]}
 				<span>{message ? message : 'Error'}!</span>
 			</div>

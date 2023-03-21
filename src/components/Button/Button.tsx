@@ -3,14 +3,24 @@ import React from 'react';
 import classes from './Button.module.css';
 
 interface IProps {
+	color?: string;
 	children: JSX.Element | string;
-	onClick: Function;
+	onClick?: Function;
 	disabled?: boolean;
+	type?: 'submit' | 'reset' | 'button';
 }
 
-const Button = ({ disabled, onClick, children }: IProps) => {
+const Button = ({
+	type,
+	disabled,
+	onClick = () => {},
+	children,
+	color,
+}: IProps) => {
 	return (
 		<button
+			type={type}
+			style={{ color: color }}
 			disabled={disabled}
 			onClick={(e) => {
 				onClick(e);
