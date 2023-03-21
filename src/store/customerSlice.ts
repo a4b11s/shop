@@ -65,7 +65,7 @@ export const customerSlice = createSlice({
 				accessToken: null,
 				email: null,
 				displayName: null,
-				photoURL: nul,
+				photoURL: null,
 			};
 		},
 	},
