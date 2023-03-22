@@ -37,3 +37,10 @@ export interface IUser {
 	uid: string | null;
 	photoURL: string | null;
 }
+
+export interface IOrderInfo {
+	name: string;
+	email: string;
+	deliveryAddress: string;
+	phone: number;
+}
