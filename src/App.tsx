@@ -1,14 +1,16 @@
 import React from 'react';
+
 import { Route, Routes } from 'react-router-dom';
 
+import Error from './views/Error/Error';
 import '@fontsource/montserrat';
 import { useAuth } from './hooks/use-auth';
-import Error from './views/Error/Error';
 import { privateRoutes, publicRoutes } from './routes/routes';
 import { Layout } from './Layout';
 
 const App = () => {
 	const { isAuth } = useAuth();
+
 	return (
 		<>
 			<Routes>
