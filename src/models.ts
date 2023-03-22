@@ -1,6 +1,6 @@
 export interface IRoutes {
-	readonly isShow: boolean;
-	readonly isIndex: boolean;
+	readonly isShowInMenu: boolean;
+	readonly isHomePage: boolean;
 	readonly path: string;
 	readonly name: string;
 	readonly component: Function;
