@@ -1,7 +1,8 @@
 import React, { MouseEvent, useRef } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
 
 import classes from './Modal.module.css';
+
+import CloseIcon from '@mui/icons-material/Close';
 
 interface IProps {
 	title: string;

@@ -1,5 +1,4 @@
 import React from 'react';
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 import { IProduct } from '../../models';
 import Price from '../Price/Price';
@@ -7,6 +6,8 @@ import StarRating from '../StarRating/StarRating';
 import Button from '../Button/Button';
 
 import classes from './ProductListItem.module.css';
+
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 interface IProps {
 	product: IProduct;

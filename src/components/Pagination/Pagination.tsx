@@ -1,4 +1,5 @@
 import React from 'react';
+
 import cnBind from 'classnames/bind';
 
 import classes from './Pagination.module.css';
@@ -36,6 +37,7 @@ const Pagination = ({ count, current, onChange }: IProps) => {
 						page: true,
 						currentPage: index + 1 === current,
 					});
+
 					return (
 						<button
 							key={'pagP' + index}

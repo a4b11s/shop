@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import classes from './Slider.module.css';
+
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 interface IProps {
 	images: Array<string>;

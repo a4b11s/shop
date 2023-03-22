@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from '../../store/store';
 import { publicRoutes, privateRoutes } from '../../routes/routes';
-import { removeUser } from '../../store/customerSlice';
-import { useAuth } from '../../hooks/use-auth';
 import Button from '../Button/Button';
 import Auth from '../Auth/Auth';
 import Modal from '../Modal/Modal';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import DropDawnMenuItem from '../DropDownMenu/DropDawnMenuItem';
+
+import { removeUser } from '../../store/customerSlice';
+import { useAppDispatch } from '../../store/store';
+
+import { useAuth } from '../../hooks/use-auth';
 
 import styles from './Header.module.css';
 
@@ -69,6 +72,7 @@ const Header = () => {
 						<DropDownMenu isOpen={isUserMenuOpen}>
 							{privateRoutes.map(({ path, isShowInMenu, name }) => {
 								if (!isShowInMenu) return null;
+
 								return (
 									<DropDawnMenuItem
 										key={path}

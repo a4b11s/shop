@@ -1,12 +1,15 @@
 import React from 'react';
+
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import GoogleIcon from '@mui/icons-material/Google';
 
 import Button from '../Button/Button';
+
 import { useAppDispatch } from '../../store/store';
 import { addUser } from '../../store/customerSlice';
 
 import classes from './Auth.module.css';
+
+import GoogleIcon from '@mui/icons-material/Google';
 
 interface IProps {
 	onAuth?: () => void;
