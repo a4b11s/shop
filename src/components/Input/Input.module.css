@@ -1,0 +1,76 @@
+.errorMessage {
+    position: absolute;
+    right: 0;
+    color: red;
+    font-size: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.inputWrapper {
+    margin: 10px;
+    width: 100%;
+    position: relative;
+}
+
+.label {
+    left: 6px;
+    font-size: 16px;
+    transform: translateY(-50%);
+    top: 50%;
+    position: absolute;
+    color: black;
+    width: 100%;
+    transition: top ease-in-out 0.3s, font-size ease-in-out 0.3s;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 6px;
+    border-radius: 8px;
+    border: none;
+    outline-style: none;
+}
+
+.inputWrapper::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: rgb(180 180 180);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 9;
+}
+
+.inputWrapper::before {
+    content: "";
+    display: block;
+    height: 2px;
+    background: var(--primary-color);
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    left: 50%;
+    z-index: 10;
+    transition: right ease-in-out 0.2s, left ease-in-out 0.2s;
+}
+
+.inputWrapperError .label {
+    color: red;
+}
+
+.inputWrapperNotEmpty::before, .inputWrapper:has(.input:focus)::before {
+    right: 0;
+    left: 0;
+}
+
+.inputWrapperNotEmpty .label, .inputWrapper:has(.input:focus) .label {
+    font-size: 14px;
+    top: 0;
+}
+
+.inputWrapperError::before, .inputWrapperError::after {
+    background-color: red;
+}
