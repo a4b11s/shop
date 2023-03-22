@@ -23,8 +23,8 @@ import Alert from '../../components/Alert/Alert';
 import classes from './SingleProduct.module.css';
 
 const SingleProduct = () => {
-  const { isAuth } = useAuth();
-		const { id } = useParams();
+	const { isAuth } = useAuth();
+	const { id } = useParams();
 	const dispatch = useAppDispatch();
 
 	const [isShowAddToCartAlert, setIsShowAddToCartAlert] = useState(false);
@@ -54,7 +54,7 @@ const SingleProduct = () => {
 	}, [product, dispatch, id]);
 
 	const handleAddToCart = () => {
-    if (isAuth) dispatch(addToCart(product));
+		if (isAuth) dispatch(addToCart(product));
 		setIsShowAddToCartAlert(true);
 		setTimeout(() => {
 			setIsShowAddToCartAlert(false);
