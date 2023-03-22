@@ -30,6 +30,7 @@ export const productsSlice = createSlice({
 		});
 		builder.addCase(fetchProducts.fulfilled, (state, action) => {
 			const { products, total } = action.payload;
+
 			state.data = products;
 			state.total = total;
 			state.status = 'fulfilled';

@@ -28,6 +28,7 @@ export const commentsSlice = createSlice({
 		});
 		builder.addCase(fetchComments.fulfilled, (state, action) => {
 			const { comments, total } = action.payload;
+
 			state.data = comments;
 			state.total = total;
 			state.status = 'fulfilled';
