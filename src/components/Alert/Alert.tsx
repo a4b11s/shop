@@ -1,11 +1,13 @@
 import React from 'react';
+
 import cnBind from 'classnames/bind';
+
+import classes from './Alert.module.css';
+
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-
-import classes from './Alert.module.css';
 
 const icons = {
 	error: <ErrorOutlineIcon />,
