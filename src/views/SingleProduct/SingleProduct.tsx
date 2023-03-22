@@ -7,6 +7,8 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
+import { useAuth } from '../../hooks/use-auth';
+import { IRootState, useAppDispatch } from '../../store/store';
 import { fetchComments } from '../../services/api';
 import { fetchSingleProducts } from '../../services/api';
 import { addToCart } from '../../store/customerSlice';
@@ -17,12 +19,12 @@ import Button from '../../components/Button/Button';
 import Comment from '../../components/Comment/Comment';
 import Spinner from '../../components/Spinner/Spinner';
 import Alert from '../../components/Alert/Alert';
-import { IRootState, useAppDispatch } from '../../store/store';
 
 import classes from './SingleProduct.module.css';
 
 const SingleProduct = () => {
-	const { id } = useParams();
+  const { isAuth } = useAuth();
+		const { id } = useParams();
 	const dispatch = useAppDispatch();
 
 	const [isShowAddToCartAlert, setIsShowAddToCartAlert] = useState(false);
@@ -52,7 +54,7 @@ const SingleProduct = () => {
 	}, [product, dispatch, id]);
 
 	const handleAddToCart = () => {
-		dispatch(addToCart(product));
+    if (isAuth) dispatch(addToCart(product));
 		setIsShowAddToCartAlert(true);
 		setTimeout(() => {
 			setIsShowAddToCartAlert(false);
@@ -81,8 +83,8 @@ const SingleProduct = () => {
 			<>
 				<Alert
 					isOpen={isShowAddToCartAlert}
-					message="Added to cart!"
-					type="success"
+					message={isAuth ? 'Added to cart!' : 'You have to be authorized!'}
+					type={isAuth ? 'success' : 'error'}
 				/>
 				<section className={classes.header}>
 					<h1 className={classes.title}>{title}</h1>
