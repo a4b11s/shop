@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
+
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
-import SafetyCheckOutlinedIcon from '@mui/icons-material/SafetyCheckOutlined';
-import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
-import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
-import { useAuth } from '../../hooks/use-auth';
-import { IRootState, useAppDispatch } from '../../store/store';
 import { fetchComments } from '../../services/api';
 import { fetchSingleProducts } from '../../services/api';
-import { addToCart } from '../../store/customerSlice';
+
+
 import Price from '../../components/Price/Price';
 import StarRating from '../../components/StarRating/StarRating';
 import Slider from '../../components/Slider/Slider';
@@ -20,7 +15,18 @@ import Comment from '../../components/Comment/Comment';
 import Spinner from '../../components/Spinner/Spinner';
 import Alert from '../../components/Alert/Alert';
 
+import { addToCart } from '../../store/customerSlice';
+import { IRootState, useAppDispatch } from '../../store/store';
+
+import { useAuth } from '../../hooks/use-auth';
+
 import classes from './SingleProduct.module.css';
+
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
+import SafetyCheckOutlinedIcon from '@mui/icons-material/SafetyCheckOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 const SingleProduct = () => {
 	const { isAuth } = useAuth();

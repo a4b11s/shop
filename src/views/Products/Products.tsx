@@ -1,16 +1,19 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 
-import { IRootState, useAppDispatch } from '../../store/store';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import { fetchProducts } from '../../services/api';
 import { fetchCategories } from '../../services/api';
 import { IProduct } from '../../models';
+
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Spinner from '../../components/Spinner/Spinner';
 import Alert from '../../components/Alert/Alert';
 import DropDown from '../../components/DropDown/DropDown';
 import Pagination from '../../components/Pagination/Pagination';
+
+import { IRootState, useAppDispatch } from '../../store/store';
 
 import classes from './Products.module.css';
 
