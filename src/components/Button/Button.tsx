@@ -1,27 +1,22 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 
 import classes from './Button.module.css';
 
-interface IProps {
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	color?: string;
 	children: JSX.Element | string;
-	onClick?: Function;
-	disabled?: boolean;
-	type?: 'submit' | 'reset' | 'button';
 }
 
 const Button = ({
-	type,
-	disabled,
 	onClick = () => {},
 	children,
 	color,
+	...otherProps
 }: IProps) => {
 	return (
 		<button
-			type={type}
+			{...otherProps}
 			style={{ color: color }}
-			disabled={disabled}
 			onClick={(e) => {
 				onClick(e);
 			}}
