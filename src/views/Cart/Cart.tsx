@@ -52,6 +52,7 @@ const Cart = () => {
 					<Price price={cartPrice} discountPercentage={0} currency="$" />
 				</div>
 				<Button
+					disabled={cart.length < 1}
 					onClick={() => {
 						navigate('/order');
 					}}
