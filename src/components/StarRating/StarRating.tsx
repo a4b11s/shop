@@ -7,11 +7,12 @@ interface IProps {
 	rating: number;
 }
 
-const StarRating = ({ rating }: IProps) => {
+const StarRating = (props: IProps) => {
+	const { rating } = props;
 	return (
 		<div className={classes.wrapper}>
 			{[...Array(5)].map((_, index) => {
-				if (rating >= index && rating <= index + 1)
+				if (rating > index && rating < index + 1)
 					return <Star key={index + 'Rating'} type={'half'} />;
 
 				return (

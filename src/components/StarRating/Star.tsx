@@ -8,7 +8,8 @@ interface IProps {
 	type: 'full' | 'empty' | 'half';
 }
 
-const Star = ({ type }: IProps) => {
+const Star = (props: IProps) => {
+	const { type } = props;
 	const color = 'rgb(250, 175, 0)';
 
 	if (type === 'full') return <StarIcon sx={{ fill: color }} />;
