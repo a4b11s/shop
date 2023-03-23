@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { fetchComments } from '../../services/api';
 import { fetchSingleProducts } from '../../services/api';
 
-
 import Price from '../../components/Price/Price';
 import StarRating from '../../components/StarRating/StarRating';
 import Slider from '../../components/Slider/Slider';
@@ -128,9 +127,7 @@ const SingleProduct = () => {
 								<span>Delivery in 3 days from the moment of the order</span>
 							</li>
 						</ul>
-						<div className={classes.description + ' ' + classes.section}>
-							{description}
-						</div>
+						<div className={classes.section}>{description}</div>
 					</div>
 				</section>
 				{!(commentsStatus === 'fulfilled' && commentsData.length) || (
