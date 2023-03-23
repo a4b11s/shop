@@ -15,16 +15,16 @@ const cx = cnBind.bind(classes);
 
 const calcWidth = (array: Array<string>): number => {
 	const wordLength = Math.max(...array.map((el) => el.length)); // calc length of the largest word in the array
-
 	return wordLength * 10;
 };
 
-const DropDown = ({
-	disabled = false,
-	options,
-	defaultValue = options[0],
-	onSelected,
-}: IProps) => {
+const DropDown = (props: IProps) => {
+	const {
+		disabled = false,
+		options,
+		defaultValue = options[0],
+		onSelected,
+	} = props;
 	const [selectedValue, setSelectedValue] = useState(defaultValue);
 	const [isSelecting, setIsSelecting] = useState(false);
 

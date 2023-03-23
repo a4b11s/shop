@@ -10,10 +10,12 @@ interface IProps {
 	slideSize: number;
 }
 
-const Slider = ({ images, slideSize }: IProps) => {
+const Slider = (props: IProps) => {
+	const { images, slideSize } = props;
+
 	const [currentPos, setCurrentPos] = useState(0);
 
-	const sliderHeight = slideSize - slideSize / 4; // 1/4 sliderWidth
+	const sliderHeight = slideSize - slideSize / 4; // 3/4 sliderWidth
 
 	const miniatureWidth = slideSize / (images.length + 2); // 2 it is spaces between miniatures. Mean spaces is 2 miniature size
 

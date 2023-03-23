@@ -1,18 +1,15 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 
 import classes from './Button.module.css';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	color?: string;
-	children: JSX.Element | string;
+	children: ReactNode | string;
 }
 
-const Button = ({
-	onClick = () => {},
-	children,
-	color,
-	...otherProps
-}: IProps) => {
+const Button = (props: IProps) => {
+	const { onClick = () => {}, children, color, ...otherProps } = props;
+
 	return (
 		<button
 			{...otherProps}

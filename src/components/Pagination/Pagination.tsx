@@ -4,6 +4,9 @@ import cnBind from 'classnames/bind';
 
 import classes from './Pagination.module.css';
 
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
 const cx = cnBind.bind(classes);
 
 interface IProps {
@@ -12,7 +15,8 @@ interface IProps {
 	onChange?: Function;
 }
 
-const Pagination = ({ count, current, onChange }: IProps) => {
+const Pagination = (props: IProps) => {
+	const { count, current, onChange } = props;
 	const changePage = (newPage: number) => {
 		onChange && onChange(newPage);
 	};
@@ -29,7 +33,7 @@ const Pagination = ({ count, current, onChange }: IProps) => {
 				onClick={handleClickOnPrevBtn}
 				className={classes.navBtn}
 			>
-				{'❮'}
+				<NavigateBeforeIcon />
 			</button>
 			<div className={classes.pages}>
 				{[...Array(count)].map((_, index) => {
@@ -56,7 +60,7 @@ const Pagination = ({ count, current, onChange }: IProps) => {
 				onClick={handleClickOnNextBtn}
 				className={classes.navBtn}
 			>
-				{'❯'}
+				<NavigateNextIcon />
 			</button>
 		</div>
 	);

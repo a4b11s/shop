@@ -24,7 +24,9 @@ interface IProps {
 
 const cx = cnBind.bind(classes);
 
-const Alert = ({ type, isOpen, message }: IProps) => {
+const Alert = (props: IProps) => {
+	const { type, isOpen, message } = props;
+
 	if (isOpen) {
 		return (
 			<div

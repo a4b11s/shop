@@ -1,4 +1,4 @@
-import React, { MouseEvent, useRef } from 'react';
+import React, { MouseEvent, ReactNode, useRef } from 'react';
 
 import classes from './Modal.module.css';
 
@@ -6,19 +6,14 @@ import CloseIcon from '@mui/icons-material/Close';
 
 interface IProps {
 	title: string;
-	actions?: JSX.Element;
-	children: JSX.Element;
+	actions?: ReactNode;
+	children: ReactNode;
 	isOpen: boolean;
 	onClose?: () => void;
 }
 
-const Modal = ({
-	title,
-	children,
-	onClose = () => {},
-	actions,
-	isOpen,
-}: IProps) => {
+const Modal = (props: IProps) => {
+	const { title, children, onClose = () => {}, actions, isOpen } = props;
 	const backdrop = useRef<HTMLDivElement>(null);
 
 	const handleClose = (e: MouseEvent) => {

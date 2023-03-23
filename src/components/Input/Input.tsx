@@ -12,13 +12,14 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
 	value?: string | number;
 }
 
-const Input = ({
-	errorMessage,
-	onChange = () => {},
-	value = '',
-	label,
-	...props
-}: IProps) => {
+const Input = (props: IProps) => {
+	const {
+		errorMessage,
+		onChange = () => {},
+		value = '',
+		label,
+		...otherProps
+	} = props;
 	const [inputValue, setInputValue] = useState(value);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,9 +40,9 @@ const Input = ({
 			</label>
 			<input
 				onChange={handleChange}
-				{...props}
 				value={inputValue}
 				className={classes.input}
+				{...otherProps}
 			/>
 			{errorMessage && (
 				<span className={classes.errorMessage}>{errorMessage}</span>

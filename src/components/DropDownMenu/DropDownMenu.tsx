@@ -11,7 +11,8 @@ interface IProps {
 
 const cx = cnBind.bind(classes);
 
-const DropDownMenu = ({ isOpen, children }: IProps) => {
+const DropDownMenu = (props: IProps) => {
+	const { isOpen, children } = props;
 	if (!isOpen) return null;
 
 	const listClassNames = cx({

@@ -9,17 +9,18 @@ import classes from './ProductCard.module.css';
 
 interface IProps {
 	product: IProduct;
-	onClickOnCard: Function;
-	onClickOnBrand: Function;
-	onClickOnCategory: Function;
+	onClickOnCard?: (id: number) => void;
+	onClickOnBrand?: (brand: string) => void;
+	onClickOnCategory?: (category: string) => void;
 }
 
-const ProductCard = ({
-	product,
-	onClickOnCategory,
-	onClickOnCard,
-	onClickOnBrand,
-}: IProps) => {
+const ProductCard = (props: IProps) => {
+	const {
+		product,
+		onClickOnCategory = () => {},
+		onClickOnCard = () => {},
+		onClickOnBrand = () => {},
+	} = props;
 	const {
 		id,
 		title,

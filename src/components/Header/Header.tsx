@@ -22,6 +22,7 @@ const Header = () => {
 	const { isAuth, photoURL } = useAuth();
 	const [isLogging, setIsLogging] = useState(false);
 	const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
 	const handleClickLoginBtn = () => {
 		setIsLogging(true);
 	};
@@ -37,7 +38,6 @@ const Header = () => {
 		dispatch(removeUser());
 	};
 
-	// @ts-ignore
 	return (
 		<>
 			<Modal

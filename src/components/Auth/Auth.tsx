@@ -15,7 +15,8 @@ interface IProps {
 	onAuth?: () => void;
 }
 
-const Auth = ({ onAuth = () => {} }: IProps) => {
+const Auth = (props: IProps) => {
+	const { onAuth = () => {} } = props;
 	const auth = getAuth();
 	const dispatch = useAppDispatch();
 

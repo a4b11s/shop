@@ -12,16 +12,12 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 interface IProps {
 	product: IProduct;
 	countInCart?: number | undefined;
-	onChangeCountInCart?: Function;
-	onDelFromCart?: Function;
+	onChangeCountInCart?: (productId: number, newCount: number) => void;
+	onDelFromCart?: (id: number) => void;
 }
 
-const ProductListItem = ({
-	product,
-	countInCart,
-	onChangeCountInCart,
-	onDelFromCart,
-}: IProps) => {
+const ProductListItem = (props: IProps) => {
+	const { product, countInCart, onChangeCountInCart, onDelFromCart } = props;
 	const { id, title, discountPercentage, rating, thumbnail, price, stock } =
 		product;
 

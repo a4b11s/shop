@@ -8,8 +8,8 @@ interface IProps {
 	comment: IComment;
 }
 
-const Comment = ({ comment }: IProps) => {
-	const { user, body } = comment;
+const Comment = (props: IProps) => {
+	const { user, body } = props.comment;
 
 	return (
 		<div className={classes.wrapper}>
