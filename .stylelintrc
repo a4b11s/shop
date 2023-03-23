@@ -7,6 +7,7 @@
     "stylelint-order"
   ],
   "rules": {
+    "block-opening-brace-space-before": "always",
     "plugin/declaration-block-no-ignored-properties": true,
     "order/order": [
       "custom-properties",
