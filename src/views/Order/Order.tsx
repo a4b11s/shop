@@ -20,6 +20,7 @@ import classes from './Order.module.css';
 const Order = () => {
 	const cart = useSelector((state: IRootState) => state.customer.cart);
 	const { isAuth, uid } = useAuth();
+
 	const initialValues = {
 		name: '',
 		email: '',
