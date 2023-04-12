@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { FormikValues, useFormik } from 'formik';
 
 import Button from '../Button/Button';
+import Input from '../Input/Input';
+import { authorizationValidationSchema } from '../../services/validationSchemas';
 
 import { useAppDispatch } from '../../store/store';
 import { addUser } from '../../store/customerSlice';
+
+import { useAuth } from '../../hooks/use-auth';
 
 import classes from './Auth.module.css';
 
@@ -16,38 +20,65 @@ interface IProps {
 }
 
 const Auth = (props: IProps) => {
+	const { auth } = useAuth();
 	const { onAuth = () => {} } = props;
-	const auth = getAuth();
 	const dispatch = useAppDispatch();
 
-	const handleGoogleAuth = () => {
-		const provider = new GoogleAuthProvider();
+	const initialValues = {
+		email: '',
+		password: '',
+	};
+	const { errors, touched, ...formik } = useFormik({
+		initialValues: initialValues,
+		validationSchema: authorizationValidationSchema,
+		onSubmit: handleFormAuthSubmit,
+	});
 
-		signInWithPopup(auth, provider).then((result) => {
-			const credentialFromResult = GoogleAuthProvider.credentialFromResult(result);
-			const { photoURL, email, displayName, uid } = result.user;
+	function handleFormAuthSubmit(value: FormikValues) {
+		auth(
+			(user) => {
+				dispatch(addUser(user));
+				onAuth();
+			},
+			{ email: value.email as string, password: value.password as string }
+		);
+	}
 
-			dispatch(
-				addUser({
-					photoURL,
-					email,
-					uid,
-					displayName,
-					accessToken: credentialFromResult?.accessToken || null,
-				})
-			);
-
+	function handleGoogleAuthButtonClick() {
+		auth((user) => {
+			dispatch(addUser(user));
 			onAuth();
 		});
-	};
+	}
 
 	return (
 		<div className={classes.wrapper}>
-			<Button onClick={handleGoogleAuth}>
-				<span className={classes.authBtn}>
-					<GoogleIcon /> Login with google
-				</span>
-			</Button>
+			<form onSubmit={formik.handleSubmit}>
+				<Input
+					type="email"
+					label="Email"
+					id="email"
+					onBlur={formik.handleBlur}
+					onChange={formik.handleChange}
+					value={formik.values.email}
+				/>
+				<Input
+					type="password"
+					label="Password"
+					id="password"
+					onBlur={formik.handleBlur}
+					onChange={formik.handleChange}
+					value={formik.values.password}
+				/>
+				<Button type="submit">Login</Button>
+			</form>
+			<div>
+				<Button onClick={handleGoogleAuthButtonClick}>
+					<span className={classes.authBtn}>
+						<GoogleIcon /> Login with google
+					</span>
+				</Button>
+			</div>
 		</div>
 	);
 };
