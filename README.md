@@ -2,6 +2,14 @@
 
 This is simple shop app create on [React](https://reactjs.org/).
 
+## Install
+
+First, you have to run
+
+### `npm init`
+
+for install dependencies
+
 ## Available Scripts
 
 In the project directory, you can run:
