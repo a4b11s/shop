@@ -15,17 +15,14 @@ export interface ICredential {
 	password: string;
 }
 
+const userMappingFunction = (data: any) => {
+	const user: IUser = data.user;
+	return user;
+};
+
 export const loginWithGoogle = (callback: (user: IUser) => void) => {
 	signInWithPopup(auth, provider).then((result) => {
-		const credentialFromResult = GoogleAuthProvider.credentialFromResult(result);
-		const { photoURL, email, displayName, uid } = result.user;
-		callback({
-			accessToken: credentialFromResult?.accessToken || null,
-			photoURL,
-			email,
-			displayName,
-			uid,
-		});
+		callback(userMappingFunction(result));
 	});
 };
 
@@ -35,37 +32,27 @@ export const loginWithCredential = (
 ) => {
 	signInWithEmailAndPassword(auth, credential.email, credential.password)
 		.then((result) => {
-			const { photoURL, email, displayName, uid } = result.user;
-			console.log(result.user);
-			callback({
-				accessToken: null,
-				photoURL,
-				email,
-				displayName,
-				uid,
-			});
-			// ...
+			callback(userMappingFunction(result));
 		})
 		.catch((error) => {
 			console.log(error.message);
 			if (error.code === 'auth/user-not-found') {
-				createUserWithEmailAndPassword(auth, credential.email, credential.password)
-					.then((result) => {
-						const { photoURL, email, displayName, uid } = result.user;
-						callback({
-							accessToken: null,
-							photoURL,
-							email,
-							displayName,
-							uid,
-						});
-						// ...
-					})
-					.catch((error) => {
-						const errorCode = error.code;
-						const errorMessage = error.message;
-						console.log(errorCode, errorMessage);
-					});
+				console.log('s');
 			}
+		});
+};
+
+export const signInWithCredential = (
+	credential: ICredential,
+	callback: (user: IUser) => void
+) => {
+	createUserWithEmailAndPassword(auth, credential.email, credential.password)
+		.then((result) => {
+			callback(userMappingFunction(result));
+		})
+		.catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.log(errorCode, errorMessage);
 		});
 };
