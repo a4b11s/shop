@@ -6,6 +6,7 @@ import {
 	ICredential,
 	loginWithCredential,
 	loginWithGoogle,
+	signInWithCredential,
 } from '../services/authApi';
 
 export const useAuth = () => {
@@ -19,8 +20,12 @@ export const useAuth = () => {
 			loginWithGoogle(cb);
 		}
 	};
+	const signIn = (cb: (user: IUser) => void, credential: ICredential) => {
+		signInWithCredential(credential, cb);
+	};
 
 	return {
+		signIn,
 		auth,
 		isAuth: !!email,
 		uid,
