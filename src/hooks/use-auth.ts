@@ -10,7 +10,7 @@ import {
 
 export const useAuth = () => {
 	const user = useSelector((state: IRootState) => state.customer.user);
-	const { displayName, uid, email, accessToken, photoURL } = user;
+	const { displayName, uid, email, photoURL } = user;
 
 	const auth = (cb: (user: IUser) => void, credential?: ICredential) => {
 		if (credential) {
@@ -25,7 +25,6 @@ export const useAuth = () => {
 		isAuth: !!email,
 		uid,
 		email,
-		accessToken,
 		displayName,
 		photoURL,
 	};

@@ -17,7 +17,6 @@ const initialState: IState = {
 	user: {
 		uid: null,
 		email: null,
-		accessToken: null,
 		displayName: null,
 		photoURL: null,
 	},
@@ -65,7 +64,6 @@ export const customerSlice = createSlice({
 		removeUser: (state) => {
 			state.user = {
 				uid: null,
-				accessToken: null,
 				email: null,
 				displayName: null,
 				photoURL: null,
