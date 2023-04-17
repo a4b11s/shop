@@ -13,7 +13,7 @@ const Button = (props: IProps) => {
 	return (
 		<button
 			{...otherProps}
-			style={{ color: color }}
+			style={{ color: color, ...otherProps.style }}
 			onClick={(e) => {
 				if (otherProps.disabled === true) return;
 				onClick(e);
