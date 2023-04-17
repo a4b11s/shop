@@ -42,7 +42,9 @@ const AuthForm = (props: IProps) => {
 				onChange={formik.handleChange}
 				value={formik.values.password}
 			/>
-			<Button type="submit">Login</Button>
+			<Button style={{ width: '100%' }} type="submit">
+				Login
+			</Button>
 		</form>
 	);
 };

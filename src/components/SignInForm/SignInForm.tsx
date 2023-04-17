@@ -42,7 +42,9 @@ const SignInForm = (props: IProps) => {
 				onChange={formik.handleChange}
 				value={formik.values.password}
 			/>
-			<Button type="submit">Sign In</Button>
+			<Button style={{ width: '100%' }} type="submit">
+				Sign In
+			</Button>
 		</form>
 	);
 };
