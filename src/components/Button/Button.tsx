@@ -15,6 +15,7 @@ const Button = (props: IProps) => {
 			{...otherProps}
 			style={{ color: color }}
 			onClick={(e) => {
+				if (otherProps.disabled === true) return;
 				onClick(e);
 			}}
 			className={classes.button}
