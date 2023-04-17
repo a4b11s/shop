@@ -5,7 +5,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { publicRoutes, privateRoutes } from '../../routes/routes';
 import Button from '../Button/Button';
 import Auth from '../Auth/Auth';
-import Modal from '../Modal/Modal';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import DropDawnMenuItem from '../DropDownMenu/DropDawnMenuItem';
 
@@ -40,15 +39,13 @@ const Header = () => {
 
 	return (
 		<>
-			<Modal
-				onClose={() => {
+			<Auth
+				onAuth={handleLogin}
+				onModalClose={() => {
 					setIsLogging(false);
 				}}
-				title="Auth"
-				isOpen={isLogging && !isAuth}
-			>
-				<Auth onAuth={handleLogin} />
-			</Modal>
+				isOpen={isLogging}
+			/>
 			<header className={styles.wrapper}>
 				<nav className={styles.nav}>
 					{publicRoutes.map(({ path, name, isShowInMenu }) => {

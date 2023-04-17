@@ -7,3 +7,12 @@
     display: flex;
     align-items: center;
 }
+
+.switchBtn {
+    display: block;
+    background: none;
+    border: none;
+    color: rgb(100 100 100);
+    cursor: pointer;
+    margin: 10px auto;
+}

@@ -5,6 +5,7 @@ import { FormikValues } from 'formik';
 import Button from '../Button/Button';
 import AuthForm from '../AuthForm/AuthForm';
 import SignInForm from '../SignInForm/SignInForm';
+import Modal from '../Modal/Modal';
 
 import { useAppDispatch } from '../../store/store';
 import { addUser } from '../../store/customerSlice';
@@ -18,10 +19,17 @@ import GoogleIcon from '@mui/icons-material/Google';
 interface IProps {
 	onAuth?: () => void;
 	onSignIn?: () => void;
+	onModalClose?: () => void;
+	isOpen?: boolean;
 }
 
 const Auth = (props: IProps) => {
-	const { onAuth = () => {}, onSignIn = () => {} } = props;
+	const {
+		onAuth = () => {},
+		onSignIn = () => {},
+		onModalClose = () => {},
+		isOpen = false,
+	} = props;
 	const { signIn, auth } = useAuth();
 	const [isSigningIn, setIsSigningIn] = useState(false);
 	const dispatch = useAppDispatch();
@@ -58,25 +66,34 @@ const Auth = (props: IProps) => {
 	}
 
 	return (
-		<div className={classes.wrapper}>
-			<div>
-				{isSigningIn ? (
-					<AuthForm handleFormAuthSubmit={handleFormAuthSubmit} />
-				) : (
-					<SignInForm handleFormSignInSubmit={handleFormSignInSubmit} />
-				)}
-				<Button onClick={handleGoogleAuthButtonClick}>
-					<span className={classes.authBtn}>
-						<GoogleIcon /> Login with google
-					</span>
-				</Button>
+		<Modal
+			onClose={onModalClose}
+			title={isSigningIn ? 'Sign in' : 'Auth'}
+			isOpen={isOpen}
+		>
+			<div className={classes.wrapper}>
 				<div>
-					<button onClick={handleSignInAuthButtonClick}>
-						{isSigningIn ? 'Login' : 'SignIn'}
-					</button>
+					{isSigningIn ? (
+						<SignInForm handleFormSignInSubmit={handleFormSignInSubmit} />
+					) : (
+						<AuthForm handleFormAuthSubmit={handleFormAuthSubmit} />
+					)}
+					<Button onClick={handleGoogleAuthButtonClick}>
+						<span className={classes.authBtn}>
+							<GoogleIcon /> Login with google
+						</span>
+					</Button>
+					<div>
+						<button
+							className={classes.switchBtn}
+							onClick={handleSignInAuthButtonClick}
+						>
+							{isSigningIn ? 'Login' : 'Sign In'}
+						</button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</Modal>
 	);
 };
 
