@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { fetchComments } from '../../services/api';
-import { fetchSingleProducts } from '../../services/api';
+import { fetchComments, fetchSingleProducts } from '../../services/api';
 
 import Price from '../../components/Price/Price';
 import StarRating from '../../components/StarRating/StarRating';
@@ -49,17 +48,13 @@ const SingleProduct = () => {
 	);
 
 	useEffect(() => {
-		if (id) {
-			if (product) {
-				dispatch(fetchComments(parseInt(id)));
-			} else {
-				dispatch(fetchSingleProducts(parseInt(id)));
-			}
-		}
-	}, [product, dispatch, id]);
+		if (!id) return;
+		dispatch(fetchComments(parseInt(id)));
+		dispatch(fetchSingleProducts(parseInt(id)));
+	}, [dispatch, id]);
 
 	const handleAddToCart = () => {
-		if (isAuth) dispatch(addToCart(product));
+		dispatch(addToCart(product));
 		setIsShowAddToCartAlert(true);
 		setTimeout(() => {
 			setIsShowAddToCartAlert(false);
@@ -88,8 +83,8 @@ const SingleProduct = () => {
 			<>
 				<Alert
 					isOpen={isShowAddToCartAlert}
-					message={isAuth ? 'Added to cart!' : 'You have to be authorized!'}
-					type={isAuth ? 'success' : 'error'}
+					message={'Added to cart!'}
+					type={'success'}
 				/>
 				<section className={classes.header}>
 					<h1 className={classes.title}>{title}</h1>
@@ -102,7 +97,7 @@ const SingleProduct = () => {
 								currency={'$'}
 							/>
 							<StarRating rating={rating} />
-							<Button onClick={handleAddToCart}>
+							<Button disabled={!isAuth} onClick={handleAddToCart}>
 								<ShoppingCartOutlinedIcon />
 							</Button>
 							<Button onClick={() => {}}>{brand}</Button>
