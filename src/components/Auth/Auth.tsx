@@ -6,6 +6,7 @@ import Button from '../Button/Button';
 import AuthForm from '../AuthForm/AuthForm';
 import SignInForm from '../SignInForm/SignInForm';
 import Modal from '../Modal/Modal';
+import Alert from '../Alert/Alert';
 
 import { useAppDispatch } from '../../store/store';
 import { addUser } from '../../store/customerSlice';
@@ -32,68 +33,89 @@ const Auth = (props: IProps) => {
 	} = props;
 	const { signIn, auth } = useAuth();
 	const [isSigningIn, setIsSigningIn] = useState(false);
+	const [error, setError] = useState('');
 	const dispatch = useAppDispatch();
 
 	function handleFormAuthSubmit(value: FormikValues) {
+		setError('');
 		auth(
 			(user) => {
 				dispatch(addUser(user));
 				onAuth();
 			},
-			{ email: value.email as string, password: value.password as string }
+			{ email: value.email as string, password: value.password as string },
+			(error) => {
+				setError(error);
+			}
 		);
 	}
 
 	function handleFormSignInSubmit(value: FormikValues) {
+		setError('');
 		signIn(
 			(user) => {
 				dispatch(addUser(user));
 				onSignIn();
 			},
-			{ email: value.email as string, password: value.password as string }
+			{ email: value.email as string, password: value.password as string },
+
+			(error) => {
+				setError(error);
+			}
 		);
 	}
 
 	function handleGoogleAuthButtonClick() {
-		auth((user) => {
-			dispatch(addUser(user));
-			onAuth();
-		});
+		setError('');
+		auth(
+			(user) => {
+				dispatch(addUser(user));
+				onAuth();
+			},
+			undefined,
+			(error) => {
+				setError(error);
+			}
+		);
 	}
 
 	function handleSignInAuthButtonClick() {
+		setError('');
 		setIsSigningIn((prevState) => !prevState);
 	}
 
 	return (
-		<Modal
-			onClose={onModalClose}
-			title={isSigningIn ? 'Sign in' : 'Auth'}
-			isOpen={isOpen}
-		>
-			<div className={classes.wrapper}>
-				<div>
-					{isSigningIn ? (
-						<SignInForm handleFormSignInSubmit={handleFormSignInSubmit} />
-					) : (
-						<AuthForm handleFormAuthSubmit={handleFormAuthSubmit} />
-					)}
-					<Button onClick={handleGoogleAuthButtonClick}>
-						<span className={classes.authBtn}>
-							<GoogleIcon /> Login with google
-						</span>
-					</Button>
+		<>
+			<Alert isOpen={!!error && isOpen} message={error} type="error" />
+			<Modal
+				onClose={onModalClose}
+				title={isSigningIn ? 'Sign in' : 'Auth'}
+				isOpen={isOpen}
+			>
+				<div className={classes.wrapper}>
 					<div>
-						<button
-							className={classes.switchBtn}
-							onClick={handleSignInAuthButtonClick}
-						>
-							{isSigningIn ? 'Login' : 'Sign In'}
-						</button>
+						{isSigningIn ? (
+							<SignInForm handleFormSignInSubmit={handleFormSignInSubmit} />
+						) : (
+							<AuthForm handleFormAuthSubmit={handleFormAuthSubmit} />
+						)}
+						<Button onClick={handleGoogleAuthButtonClick}>
+							<span className={classes.authBtn}>
+								<GoogleIcon /> Login with google
+							</span>
+						</Button>
+						<div>
+							<button
+								className={classes.switchBtn}
+								onClick={handleSignInAuthButtonClick}
+							>
+								{isSigningIn ? 'Login' : 'Sign In'}
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
-		</Modal>
+			</Modal>
+		</>
 	);
 };
 

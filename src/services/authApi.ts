@@ -20,39 +20,43 @@ const userMappingFunction = (data: any) => {
 	return user;
 };
 
-export const loginWithGoogle = (callback: (user: IUser) => void) => {
-	signInWithPopup(auth, provider).then((result) => {
-		callback(userMappingFunction(result));
-	});
+export const loginWithGoogle = (
+	callback: (user: IUser) => void,
+	reject: (error: string) => void
+) => {
+	signInWithPopup(auth, provider)
+		.then((result) => {
+			callback(userMappingFunction(result));
+		})
+		.catch((error) => {
+			reject(error);
+		});
 };
 
 export const loginWithCredential = (
 	credential: ICredential,
-	callback: (user: IUser) => void
+	callback: (user: IUser) => void,
+	reject: (error: string) => void
 ) => {
 	signInWithEmailAndPassword(auth, credential.email, credential.password)
 		.then((result) => {
 			callback(userMappingFunction(result));
 		})
 		.catch((error) => {
-			console.log(error.message);
-			if (error.code === 'auth/user-not-found') {
-				console.log('s');
-			}
+			reject(error.message);
 		});
 };
 
 export const signInWithCredential = (
 	credential: ICredential,
-	callback: (user: IUser) => void
+	callback: (user: IUser) => void,
+	reject: (error: string) => void
 ) => {
 	createUserWithEmailAndPassword(auth, credential.email, credential.password)
 		.then((result) => {
 			callback(userMappingFunction(result));
 		})
 		.catch((error) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			console.log(errorCode, errorMessage);
+			reject(error.message);
 		});
 };
