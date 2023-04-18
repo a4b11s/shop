@@ -15,10 +15,25 @@
 }
 
 .link {
+    display: inline-block;
+    width: fit-content;
     color: white;
     text-decoration: none;
     text-transform: uppercase;
     margin-left: 16px;
+}
+
+.link::after {
+    content: '';
+    display: block;
+    background: white;
+    width: 0;
+    height: 3px;
+    transition: width ease-in-out 0.2s;
+}
+
+.link:hover::after {
+    width: 100%;
 }
 
 .avatar {

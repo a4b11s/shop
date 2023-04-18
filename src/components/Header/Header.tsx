@@ -50,7 +50,7 @@ const Header = () => {
 				<nav className={styles.nav}>
 					{publicRoutes.map(({ path, name, isShowInMenu }) => {
 						return isShowInMenu ? (
-							<NavLink data-testid="link" key={name} className={styles.link} to={path}>
+							<NavLink key={name} className={styles.link} to={path}>
 								{name}
 							</NavLink>
 						) : (
