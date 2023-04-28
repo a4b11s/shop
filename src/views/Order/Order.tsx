@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { FormikValues, useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 
 import { sendOrder } from '../../services/order';
-import { orderValidationSchema } from '../../services/validationSchemas';
+import { getOrderValidationSchema } from '../../services/validationSchemas';
+import {
+	getAddressArray,
+	getCityArray,
+	getCountryArray,
+} from '../../services/addressApi';
 import { IOrderInfo } from '../../models';
 
 import Alert from '../../components/Alert/Alert';
@@ -21,15 +26,45 @@ const Order = () => {
 	const cart = useSelector((state: IRootState) => state.customer.cart);
 	const { isAuth, uid } = useAuth();
 
+	const [countries, setCountries] = useState<Array<string>>([]);
+	const [inputtedCountry, setInputtedCountry] = useState<string>();
+	const [inputtedCity, setInputtedCity] = useState<string>();
+
+	const cities = useMemo(() => {
+		if (inputtedCountry) return getCityArray(inputtedCountry);
+
+		return [];
+	}, [inputtedCountry]);
+
+	const addresses = useMemo(() => {
+		if (inputtedCity) return getAddressArray(inputtedCity);
+
+		return [];
+	}, [inputtedCity]);
+
+	const validationSchema = useMemo(() => {
+		if (countries && cities && addresses)
+			return getOrderValidationSchema(countries, cities, addresses);
+
+		return {};
+	}, [countries, cities, addresses]);
+
+	useEffect(() => {
+		setCountries(getCountryArray());
+	}, []);
+
 	const initialValues = {
 		name: '',
 		email: '',
-		deliveryAddress: '',
+		deliveryCountry: '',
+		deliveryCity: '',
+		deliveryStreet: '',
 		phone: '',
 	};
+
 	const { errors, touched, ...formik } = useFormik({
 		initialValues: initialValues,
-		validationSchema: orderValidationSchema,
+		validationSchema,
 		onSubmit: handleSubmit,
 	});
 
@@ -66,18 +101,55 @@ const Order = () => {
 					value={formik.values.email}
 				/>
 				<Input
-					label="Your delivery address"
+					label="Your Country"
+					autocomplete={countries}
 					errorMessage={
-						touched.deliveryAddress && errors.deliveryAddress
-							? errors.deliveryAddress
+						touched.deliveryCountry && errors.deliveryCountry
+							? errors.deliveryCountry
 							: undefined
 					}
-					id="deliveryAddress"
-					name="deliveryAddress"
+					id="deliveryCountry"
+					name="deliveryCountry"
+					type="text"
+					onBlur={formik.handleBlur}
+					onChange={(e) => {
+						setInputtedCountry(e.target.value);
+						formik.handleChange(e);
+					}}
+					value={formik.values.deliveryCountry}
+				/>
+				<Input
+					label="Your City"
+					autocomplete={cities}
+					errorMessage={
+						touched.deliveryCity && errors.deliveryCity
+							? errors.deliveryCity
+							: undefined
+					}
+					id="deliveryCity"
+					name="deliveryCity"
+					type="text"
+					onBlur={formik.handleBlur}
+					onChange={(e) => {
+						setInputtedCity(e.target.value);
+						formik.handleChange(e);
+					}}
+					value={formik.values.deliveryCity}
+				/>
+				<Input
+					label="Your address"
+					autocomplete={addresses}
+					errorMessage={
+						touched.deliveryStreet && errors.deliveryStreet
+							? errors.deliveryStreet
+							: undefined
+					}
+					id="deliveryStreet"
+					name="deliveryStreet"
 					type="text"
 					onBlur={formik.handleBlur}
 					onChange={formik.handleChange}
-					value={formik.values.deliveryAddress}
+					value={formik.values.deliveryStreet}
 				/>
 				<Input
 					label="Your phone"
