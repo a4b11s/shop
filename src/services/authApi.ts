@@ -15,9 +15,10 @@ export interface ICredential {
 	password: string;
 }
 
-const userMappingFunction = (data: any) => {
-	const user: IUser = data.user;
-	return user;
+const userMappingFunction = (data: any): IUser => {
+	const user = data.user;
+	const { uid, photoURL, email, displayName } = user;
+	return { uid, photoURL, email, displayName };
 };
 
 export const loginWithGoogle = (
