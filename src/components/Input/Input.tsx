@@ -1,5 +1,6 @@
 import React, {
 	ChangeEvent,
+	FocusEvent,
 	InputHTMLAttributes,
 	useRef,
 	useState,
@@ -22,17 +23,31 @@ const Input = (props: IProps) => {
 	const {
 		errorMessage,
 		onChange = () => {},
+		onFocus = () => {},
+		onBlur = () => {},
 		value = '',
 		label,
 		autocomplete,
 		...otherProps
 	} = props;
 	const [inputValue, setInputValue] = useState(value);
+	const [isShowAutocomplete, setIsShowAutocomplete] = useState<boolean>(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
 		onChange(e);
+	};
+
+	const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+		setIsShowAutocomplete(true);
+		onFocus(e);
+	};
+	const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+		setTimeout(() => {
+			setIsShowAutocomplete(false);
+			onBlur(e);
+		}, 100);
 	};
 
 	const handleAutoCompleteClick = (autocompleteItem: string) => {
@@ -73,6 +88,8 @@ const Input = (props: IProps) => {
 					{label}
 				</label>
 				<input
+					onFocus={handleFocus}
+					onBlur={handleBlur}
 					ref={inputRef}
 					onChange={handleChange}
 					value={inputValue}
@@ -82,7 +99,7 @@ const Input = (props: IProps) => {
 				{errorMessage && (
 					<span className={classes.errorMessage}>{errorMessage}</span>
 				)}
-				{autocomplete && (
+				{autocomplete && isShowAutocomplete && (
 					<ul className={classes.autocomplete}>
 						{autocomplete.map((item) => {
 							if (!item.toLowerCase().includes(inputValue.toString().toLowerCase())) {
