@@ -28,6 +28,7 @@ const Input = (props: IProps) => {
 		value = '',
 		label,
 		autocomplete,
+		name,
 		...otherProps
 	} = props;
 	const [inputValue, setInputValue] = useState(value);
@@ -47,7 +48,7 @@ const Input = (props: IProps) => {
 		setTimeout(() => {
 			setIsShowAutocomplete(false);
 			onBlur(e);
-		}, 100);
+		}, 200);
 	};
 
 	const handleAutoCompleteClick = (autocompleteItem: string) => {
@@ -88,6 +89,7 @@ const Input = (props: IProps) => {
 					{label}
 				</label>
 				<input
+					autoComplete={autocomplete ? 'none' : name}
 					onFocus={handleFocus}
 					onBlur={handleBlur}
 					ref={inputRef}
