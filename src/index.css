@@ -26,20 +26,20 @@
     margin: 20px auto 0;
 }
 
-@media screen and (max-device-width: 1536px) {
+@media (max-width: 1536px) {
     .container {
         width: var(--lg);
     }
 }
 
-@media screen and (max-device-width: 1200px) {
+@media (max-width: 1200px) {
     .container {
         width: var(--md);
     }
 }
 
 
-@media screen and (max-device-width: 900px) {
+@media (max-width: 900px) {
     .container {
         width: var(--sm);
     }

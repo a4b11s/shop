@@ -44,7 +44,7 @@
     text-align: center;
 }
 
-@media screen and (max-device-width: 900px) {
+@media (max-width: 900px) {
     .thumbnail {
         width: 50px;
         height: 25px;

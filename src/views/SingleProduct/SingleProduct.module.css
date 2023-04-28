@@ -59,7 +59,7 @@
 
 
 
-@media screen and (max-device-width: 1200px) {
+@media (max-width: 1200px) {
     .header {
         flex-direction: column;
         align-items: center;

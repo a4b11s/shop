@@ -51,20 +51,20 @@
 }
 
 
-@media screen and (max-device-width: 1536px) {
+@media (max-width: 1536px) {
     .cardWrapper {
         width: calc((100% / 3) - 10px);
     }
 }
 
-@media screen and (max-device-width: 1200px) {
+@media (max-width: 1200px) {
     .cardWrapper {
         width: calc((100% / 2) - 10px);
     }
 }
 
 
-@media screen and (max-device-width: 900px) {
+@media (max-width: 900px) {
     .cardWrapper {
         width: calc(100% - 10px);
     }
