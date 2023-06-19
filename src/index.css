@@ -4,8 +4,39 @@
 }
 
 :root {
-    --primary-color: #0072e5;
-    --secondary-color: #e56b00;
+    /** Background colors */
+    --primary-bg: #FFF;
+    --secondary-bg: #ECF4FF;
+
+    /** Colors */
+    --primary-color: #0D63F3;
+
+    /** Text colors */
+    --text-primary-color: #1E1E1E;
+    --text-secondary-color: #6C757D;
+
+    /** Stroke colors */
+    --stroke-primary-color: #E4E7EE;
+
+    /** Spacing */
+    --sp-1: 8px;
+    --sp-2: 16px;
+    --sp-3: 24px;
+    --sp-5: 32px;
+    --sp-6: 48px;
+    --sp-7: 56px;
+
+    /** Gradients */
+    --primary-gd: linear-gradient(270deg, #4D5EF6 0%, #F64D4D 100%);
+    --secondary-gd: linear-gradient(270deg, rgb(77 94 246 / 20%) 0%, rgb(246 77 77 / 20%) 100%);
+
+    /** Fontsize */
+    --fs-1: 14px;
+    --fs-2: 16px;
+    --fs-3: 18px;
+    --fs-4: 28px;
+
+    /** Breakpoints */
     --sm: 600px;
     --md: 900px;
     --lg: 1200px;
