@@ -1,0 +1,38 @@
+@import "../../variables";
+
+.wrapper {
+  position: relative;
+  height: 6px;
+  background: $stroke-primary-color;
+  margin: 8px 0;
+}
+
+.progress {
+  height: 6px;
+  background-color: $primary-color;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.minInput, .maxInput {
+  position: absolute;
+  appearance: none;
+  border: none;
+  background: none;
+  height: 6px;
+  width: 100%;
+  pointer-events: none;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.minInput::-webkit-slider-thumb, .maxInput::-webkit-slider-thumb {
+  appearance: none;
+  background: $primary-color;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  pointer-events: all;
+}
